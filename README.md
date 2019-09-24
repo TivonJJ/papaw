@@ -35,4 +35,5 @@ npm run test:unit
 ```
 
 ### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+This stater kit made with vue-cli, If you want to get more configuration, 
+You can See [Configuration Reference](https://cli.vuejs.org/config/).
