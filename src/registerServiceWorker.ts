@@ -1,6 +1,6 @@
 import {register} from 'register-service-worker';
 
-console.log('PWA register');
+console.log('register PWA');
 register(`${process.env.BASE_URL}service-worker.js`, {
     ready() {
         console.log(

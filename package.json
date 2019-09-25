@@ -4,16 +4,17 @@
   "private": true,
   "scripts": {
     "serve": "vue-cli-service serve",
-    "dev": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:test": "cross-env vue-cli-service build --mode test",
     "lint": "vue-cli-service lint",
+    "build:test": "cross-env BUILD_ENV=test vue-cli-service build",
+    "dev": "vue-cli-service serve",
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
     "axios": "^0.19.0",
     "core-js": "^2.6.5",
     "join-path": "^1.1.1",
+    "lodash": "^4.17.15",
     "moment": "^2.24.0",
     "nprogress": "^0.2.0",
     "register-service-worker": "^1.6.2",
@@ -36,9 +37,13 @@
     "babel-plugin-import": "^1.12.2",
     "chai": "^4.1.2",
     "cross-env": "^6.0.0",
+    "install": "^0.13.0",
     "less": "^3.0.4",
     "less-loader": "^5.0.0",
     "lint-staged": "^8.1.5",
+    "node-env-file": "^0.1.8",
+    "npm": "^6.11.3",
+    "properties-reader": "^0.3.1",
     "ts-import-plugin": "^1.6.1",
     "typescript": "^3.4.3",
     "vue-template-compiler": "^2.6.10"

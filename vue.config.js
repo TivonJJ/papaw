@@ -1,16 +1,25 @@
 "use strict";
 const tsImportPluginFactory = require('ts-import-plugin');
+const fs = require('fs');
+const {join} = require('path');
 const merge = require('webpack-merge');
-const theme = require('./themes/default');
+const settings = require('./settings');
+const _ = require('lodash');
+const envReader = require('node-env-file');
 
-const BUILD_ENV = process.env.BUILD_ENV || process.env.NODE_ENV;
+const {env = {}} = process;
+const BUILD_ENV = env.BUILD_ENV || env.NODE_ENV;
 console.log('run env', BUILD_ENV);
 const startParams = getStartParams();
-
-process.env.VUE_APP_START_PARAMS = JSON.stringify(startParams);
+if('basePath' in startParams){
+    settings.basePath = startParams.basePath;
+}
+process.env.VUE_APP_TITLE = settings.title;
+process.env.VUE_APP_BUILD_ENV = BUILD_ENV;
+settings.envconf = getEnvConf(BUILD_ENV);
 
 module.exports = {
-    baseUrl: startParams.basePath,
+    publicPath: settings.basePath,
     devServer: {
         disableHostCheck: true,
         proxy: {
@@ -24,7 +33,7 @@ module.exports = {
     css: {
         loaderOptions: {
             less: {
-                modifyVars: theme
+                modifyVars: settings.theme
             }
         }
     },
@@ -50,22 +59,15 @@ module.exports = {
                 });
                 return options;
             });
+        config.plugin('define').tap(definitions => {
+            definitions[0] = Object.assign(definitions[0], {
+                Settings: JSON.stringify(settings),
+                StartParams: JSON.stringify(startParams)
+            });
+            return definitions
+        })
     },
-    pwa: {
-        name: 'My App',
-        themeColor: '#4DBA87',
-        msTileColor: '#000000',
-        appleMobileWebAppCapable: 'yes',
-        appleMobileWebAppStatusBarStyle: 'black',
-
-        // configure the workbox plugin
-        workboxPluginMode: 'InjectManifest',
-        workboxOptions: {
-            // swSrc is required in InjectManifest mode.
-            swSrc: 'dev/sw.js',
-            // ...other Workbox options...
-        }
-    }
+    pwa: getPWASetting()
 };
 
 function getStartParams() {
@@ -78,4 +80,34 @@ function getStartParams() {
             }
             return args;
         }, {basePath: '/', BUILD_ENV});
+}
+
+function getEnvConf(env) {
+    let conf = {};
+    const confDir = join(__dirname,'envconf');
+    const baseConf = join(confDir,'base.env');
+    if(fs.existsSync(baseConf)){
+        _.merge(conf,envReader(baseConf));
+    }
+    const envConf = join(confDir,env+'.env');
+    if(fs.existsSync(envConf)){
+        _.merge(conf,envReader(envConf,{overwrite: true}));
+    }
+    return conf;
+}
+
+function getPWASetting() {
+    if(!settings.pwa)return undefined;
+    if(settings.pwa === true){
+        return {
+            // 配置 workbox 插件
+            workboxPluginMode: 'InjectManifest',
+            workboxOptions: {
+                // InjectManifest 模式下 swSrc 是必填的。
+                swSrc: 'src/service-worker.js',
+                // ...其它 Workbox 选项...
+            }
+        }
+    }
+    return settings.pwa;
 }

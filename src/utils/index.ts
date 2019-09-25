@@ -1,5 +1,5 @@
 // tslint:disable-next-line:no-var-requires
-const crypto = require('crypto');
+// const crypto = require('crypto');
 
 /**
  * 数组去重
@@ -54,9 +54,9 @@ export const removeEmptyProperty = (obj: any|{}, options: RemoveEmptyPropertyOpt
  * @param digestType='hex'
  */
 export const md5 = (str: string, digestType: string = 'hex') => {
-    const hash = crypto.createHash('md5');
-    hash.update(str);
-    return hash.digest(digestType);
+    // const hash = crypto.createHash('md5');
+    // hash.update(str);
+    // return hash.digest(digestType);
 };
 
 /**

@@ -1,6 +1,4 @@
-import defaultSettings from '@/settings';
-
-const title = defaultSettings.title || '';
+const title = Settings.title || '';
 
 export default function(pageTitle: string): string {
   if (pageTitle) {

@@ -6,6 +6,7 @@
         </div>
         <router-link to="about">组件示例</router-link>
         <PaymentIcon code="Alipay"/>
+        <PaymentIcon code="Alipay22"/>
     </div>
 </template>
 

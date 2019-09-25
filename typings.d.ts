@@ -10,4 +10,7 @@ interface Window {
     app: any;
 }
 
+declare const Settings: any;
+declare const StartParams: any;
+
 declare module 'join-path';
