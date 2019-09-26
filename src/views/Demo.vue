@@ -36,7 +36,7 @@
                 <Button plain type="info">朴素按钮</Button>
                 <Button plain hairline type="primary">细边框按钮</Button>
                 <Button plain hairline type="info">细边框按钮</Button>
-                <Button loading type="primary" />
+                <Button loading type="primary"/>
             </div>
         </div>
 
@@ -46,7 +46,7 @@
                 <Icon name="close" color="red"/>
                 <Icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png"/>
                 <Icon name="chat" dot color="blue"/>
-                <Icon name="chat" info="9" />
+                <Icon name="chat" info="9"/>
                 <Icon name="chat" info="99+" size="30px"/>
             </div>
         </div>
@@ -66,10 +66,17 @@
                 <div class="pull-right">右浮动</div>
             </div>
         </div>
+
+        <div class="group">
+            <div class="title">时间格式化</div>
+            <div class="content margin">
+                <div>{{date | moment('YYYY年MM月DD日 HH:mm:ss')}}</div>
+            </div>
+        </div>
     </div>
 </template>
 <script lang="ts">
-    import {Component, Vue} from 'vue-property-decorator';
+    import {Component, Vue, Provide} from 'vue-property-decorator';
     import {CellGroup, Cell, Field, Button, Icon} from 'vant';
     import PaymentIcon from '@/components/PaymentIcon.vue';
 
@@ -84,30 +91,50 @@
         },
     })
     export default class Demo extends Vue {
+        interval?: number = undefined;
+
+        @Provide() date: number = Date.now();
+
+        mounted() {
+            this.interval = setInterval(() => {
+                this.date = Date.now();
+            })
+        }
+
+        beforeDestroy() {
+            if (this.interval) {
+                clearInterval(this.interval)
+            }
+        }
     }
 </script>
 <style lang="less" scoped>
     @import "~@/styles/mixins";
 
-    .group{
+    .group {
         margin-bottom: 12px;
     }
-    .title{
+
+    .title {
         padding: 12px;
         border-top: solid 1px @border-color;
         font-weight: bold;
     }
-    .content{
+
+    .content {
         padding: 12px 0;
-        &.margin{
+
+        &.margin {
             margin: 0 12px;
         }
     }
-    .buttons button{
+
+    .buttons button {
         margin-right: 8px;
         margin-bottom: 8px;
     }
-    .icons .van-icon{
+
+    .icons .van-icon {
         margin-right: 8px;
         margin-bottom: 8px;
         font-size: 20px;

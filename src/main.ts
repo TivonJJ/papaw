@@ -4,6 +4,7 @@ import router from './router';
 import store from './store';
 import getPageTitle from '@/utils/get-page-title';
 import './registerServiceWorker';
+import './filters';
 import {Dialog, Toast, Notify} from 'vant';
 
 Vue.use(Dialog).use(Toast).use(Notify);

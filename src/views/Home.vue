@@ -49,45 +49,43 @@
 </template>
 
 <script lang="ts">
-import {Component, Vue} from 'vue-property-decorator';
-import {CellGroup, Cell, Row, Col, Icon} from 'vant';
-import logo from '@/assets/logo.png';
+    import {Component, Vue, Provide} from 'vue-property-decorator';
+    import {CellGroup, Cell, Row, Col, Icon} from 'vant';
+    import logo from '@/assets/logo.png';
 
-@Component({
-    components: {
-        CellGroup,
-        Cell,
-        Row,
-        Col,
-        Icon,
-    },
-})
-export default class Home extends Vue {
-    public data() {
-        return {
-            logo,
-        };
-    }
+    @Component({
+        components: {
+            CellGroup,
+            Cell,
+            Row,
+            Col,
+            Icon,
+        },
+    })
+    export default class Home extends Vue {
 
-    public showSetting = () => {
-        this.$dialog({title: '设置', message: JSON.stringify(Settings)});
+        @Provide() logo: string = logo;
+
+        public showSetting = () => {
+            this.$dialog({title: '设置', message: JSON.stringify(Settings)});
+        }
+        public showStartParams = () => {
+            this.$dialog({title: '启动参数', message: JSON.stringify(StartParams)});
+        }
     }
-    public showStartParams = () => {
-        this.$dialog({title: '启动参数', message: JSON.stringify(StartParams)});
-    }
-}
 </script>
 
 <style lang="less" scoped>
     @import "~@/styles/mixins";
 
-    .banner{
+    .banner {
         background: url("~@/assets/banner.jpg") no-repeat;
         background-size: contain;
         height: 53vw;
         display: flex;
         align-items: center;
-        .logo{
+
+        .logo {
             display: block;
             height: 60px;
             margin: auto;
