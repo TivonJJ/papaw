@@ -68,7 +68,8 @@
 
         public showSetting = () => {
             this.$dialog({title: '设置', message: JSON.stringify(Settings)});
-        }
+        };
+
         public showStartParams = () => {
             this.$dialog({title: '启动参数', message: JSON.stringify(StartParams)});
         }

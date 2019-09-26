@@ -90,7 +90,7 @@
             Icon,
         },
     })
-    export default class Demo extends Vue {
+    export      default   class Demo extends Vue {
         public interval?: number = undefined;
 
         @Provide() public date: number = Date.now();
