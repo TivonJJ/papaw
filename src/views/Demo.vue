@@ -98,7 +98,7 @@
         public mounted() {
             this.interval = setInterval(() => {
                 this.date = Date.now();
-            });
+            },1000);
         }
 
         public beforeDestroy() {
