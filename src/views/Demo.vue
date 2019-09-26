@@ -90,7 +90,7 @@
             Icon,
         },
     })
-    export      default   class Demo extends Vue {
+    export default class Demo extends Vue {
         public interval?: number = undefined;
 
         @Provide() public date: number = Date.now();
@@ -98,7 +98,7 @@
         public mounted() {
             this.interval = setInterval(() => {
                 this.date = Date.now();
-            },1000);
+            }, 1000);
         }
 
         public beforeDestroy() {
