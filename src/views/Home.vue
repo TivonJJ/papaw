@@ -64,7 +64,7 @@
     })
     export default class Home extends Vue {
 
-        @Provide() logo: string = logo;
+        @Provide() public logo: string = logo;
 
         public showSetting = () => {
             this.$dialog({title: '设置', message: JSON.stringify(Settings)});

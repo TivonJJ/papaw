@@ -91,25 +91,25 @@
         },
     })
     export default class Demo extends Vue {
-        interval?: number = undefined;
+        public interval?: number = undefined;
 
-        @Provide() date: number = Date.now();
+        @Provide() public date: number = Date.now();
 
-        mounted() {
+        public mounted() {
             this.interval = setInterval(() => {
                 this.date = Date.now();
-            })
+            });
         }
 
-        beforeDestroy() {
+        public beforeDestroy() {
             if (this.interval) {
-                clearInterval(this.interval)
+                clearInterval(this.interval);
             }
         }
     }
 </script>
 <style lang="less" scoped>
-    @import "~@/styles/mixins";
+    @import '~@/styles/mixins';
 
     .group {
         margin-bottom: 12px;
