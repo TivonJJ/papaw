@@ -6,5 +6,4 @@
 
 <style lang="less">
     @import "~@/styles/common";
-    @import '~vant/lib/style/base.css';
 </style>

@@ -33,10 +33,12 @@ module.exports = {
     css: {
         loaderOptions: {
             less: {
-                modifyVars: settings.theme
+                modifyVars: settings.theme,
+                javascriptEnabled: true
             }
         }
     },
+    parallel: false,
     chainWebpack: config => {
         config.module
             .rule('ts')
@@ -49,7 +51,7 @@ module.exports = {
                             tsImportPluginFactory({
                                 libraryName: 'vant',
                                 libraryDirectory: 'es',
-                                style: true
+                                style: 'less'
                             })
                         ]
                     }),
