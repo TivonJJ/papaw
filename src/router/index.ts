@@ -23,5 +23,11 @@ export default new Router({
             // which is lazy-loaded when the route is visited.
             component: () => import(/* webpackChunkName: "demo" */ '@/views/Demo.vue'),
         },
+        {
+            path: '/user',
+            name: 'user',
+            meta: {title: '用户演示页面'},
+            component: () => import(/* webpackChunkName: "user" */ '@/views/User.vue'),
+        },
     ],
 });
