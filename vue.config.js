@@ -39,6 +39,8 @@ module.exports = {
         }
     },
     parallel: false,
+    pwa: getPWASetting(),
+    productionSourceMap: false,
     chainWebpack: config => {
         config.module
             .rule('ts')
@@ -69,7 +71,14 @@ module.exports = {
             return definitions
         })
     },
-    pwa: getPWASetting()
+    configureWebpack:{
+        optimization: {
+            splitChunks: {
+                minSize: 200 * 1000,
+                maxSize: 200 * 1000,
+            }
+        }
+    }
 };
 
 function getStartParams() {

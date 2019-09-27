@@ -70,7 +70,7 @@
         <div class="group">
             <div class="title">时间格式化</div>
             <div class="content margin">
-                <div>{{date | moment('YYYY年MM月DD日 HH:mm:ss')}}</div>
+                <DateFormat :date="date" format="YYYY年MM月DD日 HH:mm:ss"/>
             </div>
         </div>
     </div>
@@ -79,6 +79,7 @@
 import {Component, Vue, Provide} from 'vue-property-decorator';
 import {CellGroup, Cell, Field, Button, Icon} from 'vant';
 import PaymentIcon from '@/components/PaymentIcon.vue';
+import DateFormat from '@/components/DateFormat.vue';
 
 @Component({
     components: {
@@ -88,6 +89,7 @@ import PaymentIcon from '@/components/PaymentIcon.vue';
         PaymentIcon,
         Button,
         Icon,
+        DateFormat,
     },
 })
 export default class Demo extends Vue {

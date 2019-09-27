@@ -30,8 +30,10 @@
         components: {Icon},
     })
     export default class PaymentIcon extends Vue {
-        @Prop ({required: true}) public code!: string;
-        @Prop ({default: 28}) public size: number = 28;
+        @Prop ({required: true})
+        public code!: string;
+        @Prop ({default: 28})
+        public size: number = 28;
         public grey: boolean = false;
 
         get iconPos() {

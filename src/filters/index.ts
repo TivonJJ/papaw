@@ -1,1 +1,1 @@
-import './moment';
+// You can add vue filters at here
