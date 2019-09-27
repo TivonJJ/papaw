@@ -53,28 +53,28 @@
 </template>
 
 <script lang="ts">
-    import {Component, Vue} from 'vue-property-decorator';
-    import {CellGroup, Cell, Row, Col, Icon} from 'vant';
+import {Component, Vue} from 'vue-property-decorator';
+import {CellGroup, Cell, Row, Col, Icon} from 'vant';
 
-    @Component({
-        components: {
-            CellGroup,
-            Cell,
-            Row,
-            Col,
-            Icon,
-        },
-    })
-    export default class Home extends Vue {
+@Component({
+    components: {
+        CellGroup,
+        Cell,
+        Row,
+        Col,
+        Icon,
+    },
+})
+export default class Home extends Vue {
 
-        public showSetting = () => {
-            this.$dialog({title: '设置', message: JSON.stringify(Settings)});
-        };
+    public showSetting = () => {
+        this.$dialog({title: '设置', message: JSON.stringify(Settings)});
+    };
 
-        public showStartParams = () => {
-            this.$dialog({title: '启动参数', message: JSON.stringify(StartParams)});
-        }
+    public showStartParams = () => {
+        this.$dialog({title: '启动参数', message: JSON.stringify(StartParams)});
     }
+}
 </script>
 
 <style lang="less" scoped>

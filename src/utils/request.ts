@@ -1,7 +1,7 @@
 import axios from 'axios';
 import joinPath from 'join-path';
 
-const baseURL = process.env.VUE_APP_REQUEST_BASE_URL || '';
+const baseURL = '/api';
 
 /**
  * 创建一个默认的axios实例

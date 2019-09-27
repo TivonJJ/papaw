@@ -93,9 +93,9 @@ import DateFormat from '@/components/DateFormat.vue';
     },
 })
 export default class Demo extends Vue {
-    public interval?: number = undefined;
+    interval?: number = undefined;
 
-    @Provide() public date: number = Date.now();
+    @Provide() date: number = Date.now();
 
     public mounted() {
         this.interval = setInterval(() => {
