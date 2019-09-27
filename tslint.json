@@ -24,6 +24,7 @@
             true,
             "single"
         ],
-        "no-console": false
+        "no-console": false,
+        "member-access": false
     }
 }
