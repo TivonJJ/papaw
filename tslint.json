@@ -24,7 +24,6 @@
             true,
             "single"
         ],
-        "no-console": false,
-        "no-unused-variable": [true, {"ignore-pattern": "^_"}]
+        "no-console": false
     }
 }

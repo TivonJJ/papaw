@@ -76,37 +76,37 @@
     </div>
 </template>
 <script lang="ts">
-    import {Component, Vue, Provide} from 'vue-property-decorator';
-    import {CellGroup, Cell, Field, Button, Icon} from 'vant';
-    import PaymentIcon from '@/components/PaymentIcon.vue';
+import {Component, Vue, Provide} from 'vue-property-decorator';
+import {CellGroup, Cell, Field, Button, Icon} from 'vant';
+import PaymentIcon from '@/components/PaymentIcon.vue';
 
-    @Component({
-        components: {
-            CellGroup,
-            Cell,
-            Field,
-            PaymentIcon,
-            Button,
-            Icon,
-        },
-    })
-    export default class Demo extends Vue {
-        public interval?: number = undefined;
+@Component({
+    components: {
+        CellGroup,
+        Cell,
+        Field,
+        PaymentIcon,
+        Button,
+        Icon,
+    },
+})
+export default class Demo extends Vue {
+    public interval?: number = undefined;
 
-        @Provide() public date: number = Date.now();
+    @Provide() public date: number = Date.now();
 
-        public mounted() {
-            this.interval = setInterval(() => {
-                this.date = Date.now();
-            }, 1000);
-        }
+    public mounted() {
+        this.interval = setInterval(() => {
+            this.date = Date.now();
+        }, 1000);
+    }
 
-        public beforeDestroy() {
-            if (this.interval) {
-                clearInterval(this.interval);
-            }
+    public beforeDestroy() {
+        if (this.interval) {
+            clearInterval(this.interval);
         }
     }
+}
 </script>
 <style lang="less" scoped>
     @import '~@/styles/mixins';

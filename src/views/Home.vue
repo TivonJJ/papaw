@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="banner">
-            <img :src="logo" class="logo"/>
+            <img src="@/assets/logo.png" class="logo"/>
         </div>
         <Row class="user-links">
             <Col span="6" @click="$toast('Click:待付款')">
@@ -49,9 +49,8 @@
 </template>
 
 <script lang="ts">
-    import {Component, Vue, Provide} from 'vue-property-decorator';
+    import {Component, Vue} from 'vue-property-decorator';
     import {CellGroup, Cell, Row, Col, Icon} from 'vant';
-    import logo from '@/assets/logo.png';
 
     @Component({
         components: {
@@ -63,8 +62,6 @@
         },
     })
     export default class Home extends Vue {
-
-        @Provide() public logo: string = logo;
 
         public showSetting = () => {
             this.$dialog({title: '设置', message: JSON.stringify(Settings)});
