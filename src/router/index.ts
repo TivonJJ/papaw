@@ -29,5 +29,11 @@ export default new Router({
             meta: {title: '用户演示页面'},
             component: () => import(/* webpackChunkName: "user" */ '@/views/User.vue'),
         },
+        {
+            path: '/form',
+            name: 'form',
+            meta: {title: '表单演示页面'},
+            component: () => import(/* webpackChunkName: "form" */ '@/views/Form.vue'),
+        },
     ],
 });

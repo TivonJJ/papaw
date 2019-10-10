@@ -2,11 +2,11 @@
 node_modules
 /dist
 /dist-server.js
+/package-lock.json
 
 # local env files
 .env.local
 .env.*.local
-package-lock.json
 
 # Log files
 npm-debug.log*

@@ -40,6 +40,10 @@
                   title="Vuex示例"
                   is-link
                   to="user"/>
+            <Cell icon="notes-o"
+                  title="Form表单示例"
+                  is-link
+                  to="form"/>
             <Cell icon="setting-o"
                   title="系统配置"
                   label="settings.js的全局配置，内含环境配置"
