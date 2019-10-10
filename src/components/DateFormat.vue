@@ -13,7 +13,9 @@ export default class DateFormat extends Vue {
     public format?: string;
 
     public get formattedDate() {
-        if (!this.date) {return ''; }
+        if (!this.date) {
+            return '';
+        }
         return moment(this.date).format(this.format);
     }
 }

@@ -73,7 +73,7 @@ export default class Home extends Vue {
 
     public showStartParams = () => {
         this.$dialog({title: '启动参数', message: JSON.stringify(StartParams)});
-    }
+    };
 }
 </script>
 

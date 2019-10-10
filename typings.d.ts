@@ -14,4 +14,3 @@ declare const Settings: any;
 declare const StartParams: any;
 
 declare module 'join-path';
-declare module 'vue-moment';
