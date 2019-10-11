@@ -16,7 +16,7 @@
                position="bottom"
         >
             <DatetimePicker
-                v-model="currentDate"
+                v-model="currentPickerDate"
                 :type="type"
                 :title="title"
                 :formatter="formatter"
@@ -39,7 +39,7 @@
     </div>
 </template>
 <script lang="ts">
-import {Component, Prop, Provide, Vue} from 'vue-property-decorator';
+import {Component, Prop, Provide, Vue, Watch} from 'vue-property-decorator';
 import {DatetimePicker, Popup, Icon} from 'vant';
 import moment from 'moment';
 
@@ -88,20 +88,26 @@ export default class DatetimeInput extends Vue {
     @Prop()
     visibleItemCount?: number;
     @Provide()
-    currentDate: Date | string = '';
+    currentPickerDate: Date | string = '';
+    @Provide()
+    currentValue: Date | string = '';
     @Provide()
     pickerVisible: boolean = false;
 
+    @Watch('value')
+    valueChange(value: Date | string) {
+        this.currentValue = value;
+        this.currentPickerDate = value;
+    }
+
     created() {
-        if (this.defaultDate) {
-            this.currentDate = this.defaultDate;
+        const date = this.value || this.defaultDate;
+        if (date) {
+            this.currentValue = this.currentPickerDate = date;
         }
     }
 
     showPicker() {
-        if (this.value) {
-            this.currentDate = this.value;
-        }
         this.pickerVisible = true;
     }
 
@@ -130,7 +136,7 @@ export default class DatetimeInput extends Vue {
     changeValue(value: Date | string) {
         this.$emit('input', value);
         this.$emit('change', value);
-        this.currentDate = value;
+        this.currentValue = value;
     }
 
     getDefaultFormat() {
@@ -145,7 +151,7 @@ export default class DatetimeInput extends Vue {
     }
 
     get formattedValue() {
-        const {value} = this;
+        const {currentValue: value} = this;
         if (!value) {
             return '';
         }
@@ -160,7 +166,7 @@ export default class DatetimeInput extends Vue {
     }
 
     get clearButtonVisible() {
-        return this.clearable && !!this.value;
+        return this.clearable && !!this.currentValue;
     }
 }
 </script>

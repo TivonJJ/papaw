@@ -1,9 +1,9 @@
 <template>
     <div>
-        <div v-if="type==='v-password'" class="nkbi-password-input">
+        <div v-if="type==='v-password'" class="comp-nkbi-password-input">
             <PasswordInput
                 style="margin: 0"
-                :value="value"
+                :value="currentValue"
                 :info="placeholder"
                 :focused="keyboardVisible"
                 :mask="mask"
@@ -14,13 +14,14 @@
         <template v-else>
             <input :placeholder="placeholder"
                    class="van-field__control"
-                   :value="value"
+                   :value="currentValue"
                    :type="type"
                    readonly
                    @touchstart.stop="showKeyboard"
             />
         </template>
         <NumberKeyboard
+            ref="numberKeyboard"
             :show="keyboardVisible"
             :extra-key="extraKey"
             :theme="theme"
@@ -45,7 +46,7 @@
     </div>
 </template>
 <script lang="ts">
-import {Component, Prop, Provide, Vue} from 'vue-property-decorator';
+import {Component, Prop, Provide, Vue, Watch} from 'vue-property-decorator';
 import {NumberKeyboard, PasswordInput} from 'vant';
 
 @Component({
@@ -89,12 +90,24 @@ export default class NumberKeyboardInput extends Vue {
     safeAreaInsetBottom?: boolean;
     @Provide()
     keyboardVisible: boolean = false;
+    @Provide()
+    currentValue: string | number = '';
 
-    get _value() {
-        return this.value;
+    @Watch('value')
+    valueChange(value: any) {
+        this.currentValue = value;
     }
 
-    set _value(value) {
+    created() {
+        this.currentValue = this.value || '';
+    }
+
+    get _value() {
+        return this.currentValue;
+    }
+
+    set _value(value: any) {
+        this.currentValue = value;
         this.$emit('input', value);
     }
 
@@ -112,7 +125,7 @@ export default class NumberKeyboardInput extends Vue {
     }
 
     onInput(...args: any) {
-        this.$emit('blur', ...args);
+        this.$emit('input', ...args);
     }
 
     onDelete(...args: any) {
@@ -133,7 +146,7 @@ export default class NumberKeyboardInput extends Vue {
 }
 </script>
 <style lang="less">
-    .nkbi-password-input .van-password-input{
+    .comp-nkbi-password-input .van-password-input{
         margin-left: 0;
         margin-right: 0;
     }

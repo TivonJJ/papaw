@@ -3,6 +3,7 @@
         <div class="header">表单示列</div>
         <CellGroup>
             <Field v-model="form.name"
+                   required
                    label="用户名"
                    placeholder="请输入用户名"
             />
@@ -37,12 +38,19 @@
                     placeholder="请选择预约时间"
                 />
             </Field>
-            <Field label="交易密码" required>
+            <Field label="核销密码" required>
                 <NumberKeyboardInput
                     slot="input"
                     v-model="form.transPwd"
                     theme="custom"
                     type="password"
+                />
+            </Field>
+            <Field label="预约类型" required>
+                <Selector
+                    slot="input"
+                    :options="types"
+                    v-model="form.type"
                 />
             </Field>
         </CellGroup>
@@ -56,6 +64,7 @@ import {Component, Vue, Provide} from 'vue-property-decorator';
 import {Button, Field, CellGroup, Cell} from 'vant';
 import NumberKeyboardInput from '@/components/NumberKeyboardInput.vue';
 import DatetimeInput from '@/components/DatetimeInput.vue';
+import Selector from '@/components/Selector.vue';
 
 interface Form {
     name?: string;
@@ -64,6 +73,7 @@ interface Form {
     sms?: string;
     bookTime?: Date;
     transPwd?: string|number;
+    type?: any;
 }
 
 @Component({
@@ -74,11 +84,17 @@ interface Form {
         Field,
         NumberKeyboardInput,
         DatetimeInput,
+        Selector,
     },
 })
 export default class UserView extends Vue {
     @Provide()
-    form: Form = {};
+    form: Form = {
+        bookTime: new Date(),
+        type: 'O02',
+    };
+    @Provide()
+    types: any[] = [{label: '上门服务', value: 'S01'}, {label: '在线服务', value: 'O02'}, {label: '补差服务', value: 'CH001'}];
 }
 </script>
 <style lang="less" scoped>
