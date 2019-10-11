@@ -1,6 +1,5 @@
 <template>
-    <Cell :title="label" title-class="van-field__label">
-        <slot name="title" slot="label"/>
+    <div>
         <div class="van-field__body">
             <input :placeholder="placeholder"
                    class="van-field__control"
@@ -37,26 +36,23 @@
                 @change="onChange"
             />
         </Popup>
-    </Cell>
+    </div>
 </template>
 <script lang="ts">
 import {Component, Prop, Provide, Vue} from 'vue-property-decorator';
-import {Cell, DatetimePicker, Popup, Icon} from 'vant';
+import {DatetimePicker, Popup, Icon} from 'vant';
 import moment from 'moment';
 
 @Component({
     components: {
-        Cell,
         DatetimePicker,
         Popup,
         Icon,
     },
 })
-export default class DateTimePickerField extends Vue {
+export default class DatetimeInput extends Vue {
     @Prop()
     placeholder?: string;
-    @Prop()
-    label?: string;
     @Prop({default: false, type: Boolean})
     clearable?: boolean;
     @Prop()
