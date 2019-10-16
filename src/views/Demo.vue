@@ -111,7 +111,7 @@ export default class Demo extends Vue {
 }
 </script>
 <style lang="less" scoped>
-    @import '~@/styles/mixins';
+    @import '~@/styles/vars';
 
     .group {
         margin-bottom: 12px;

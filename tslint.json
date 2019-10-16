@@ -9,6 +9,20 @@
         ]
     },
     "rules": {
+        "class-name": true,
+        "comment-format": [
+            true,
+            "check-space"
+        ],
+        "forin": true,
+        "jsdoc-format": true,
+        "label-position": true,
+        "member-ordering": true,
+        "no-arg": true,
+        "no-construct": true,
+        "no-eval": true,
+        "no-unused-expression": true,
+        "no-var-keyword": true,
         "indent": [
             true,
             "spaces",
@@ -22,7 +36,8 @@
         "semicolon": [true, "always", "ignore-bound-class-methods"],
         "quotemark": [
             true,
-            "single"
+            "single",
+            "jsx-double"
         ],
         "no-console": false,
         "member-access": false

@@ -75,7 +75,6 @@ import DatetimeInput from '@/components/DatetimeInput.vue';
 import Selector from '@/components/Selector.vue';
 import PaForm from '@/components/PaForm.vue';
 import PaFormItem from '@/components/PaFormItem.vue';
-import number from 'less/lib/less/functions/number';
 
 interface Form {
     name?: string;

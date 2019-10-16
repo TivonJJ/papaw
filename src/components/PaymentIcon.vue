@@ -59,7 +59,7 @@
     }
 </script>
 <style lang="less">
-    @import "~@/styles/mixins";
+    @import "~@/styles/vars";
 
     .comp-payment_icon_item{
         display: inline-block;

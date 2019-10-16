@@ -82,7 +82,7 @@ export default class Home extends Vue {
 </script>
 
 <style lang="less" scoped>
-    @import "~@/styles/mixins";
+    @import "~@/styles/vars";
 
     .banner {
         background: url("~@/assets/banner.jpg") no-repeat;
