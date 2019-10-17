@@ -50,7 +50,6 @@ export default {
             this.$emit('reset', event);
         },
         validate(callback) {
-            console.log(this.rules);
             this.validated = true;
             const validator = new Validator(this.rules);
             return validator.validate(this.value, (errors, fields) => {
