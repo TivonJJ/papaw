@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-if="type==='v-password'" class="comp-nkbi-password-input">
+        <div v-if="type === 'v-password'" class="comp-nkbi-password-input">
             <PasswordInput
                 style="margin: 0"
                 :value="currentValue"
@@ -12,12 +12,13 @@
             />
         </div>
         <template v-else>
-            <input :placeholder="placeholder"
-                   class="van-field__control"
-                   :value="currentValue"
-                   :type="type"
-                   readonly
-                   @touchstart.stop="showKeyboard"
+            <input
+                :placeholder="placeholder"
+                class="van-field__control"
+                :value="currentValue"
+                :type="type"
+                readonly
+                @touchstart.stop="showKeyboard"
             />
         </template>
         <NumberKeyboard
@@ -34,7 +35,6 @@
             :show-delete-key="showDeleteKey"
             :hide-on-click-outside="hideOnClickOutside"
             :safe-area-inset-bottom="safeAreaInsetBottom"
-            close-button-text="完成"
             v-model="_value"
             @input="onInput"
             @blur="onBlur"
@@ -46,8 +46,8 @@
     </div>
 </template>
 <script lang="ts">
-import {Component, Prop, Provide, Vue, Watch} from 'vue-property-decorator';
-import {NumberKeyboard, PasswordInput} from 'vant';
+import { Component, Prop, Provide, Vue, Watch } from 'vue-property-decorator';
+import { NumberKeyboard, PasswordInput } from 'vant';
 
 @Component({
     components: {
@@ -58,35 +58,35 @@ import {NumberKeyboard, PasswordInput} from 'vant';
 export default class NumberKeyboardInput extends Vue {
     @Prop()
     type?: string;
-    @Prop({type: Boolean, default: true})
+    @Prop({ type: Boolean, default: true })
     mask?: boolean;
     @Prop()
-    gutter?: number|string;
+    gutter?: number | string;
     @Prop()
     value?: string | number;
     @Prop()
     placeholder?: string;
-    @Prop({default: '.'})
+    @Prop({ default: '.' })
     extraKey?: string;
-    @Prop({default: 'custom'})
+    @Prop({ default: 'custom' })
     theme?: string;
     @Prop()
     title?: string;
     @Prop()
-    maxlength?: number|string;
-    @Prop({type: Boolean, default: true})
+    maxlength?: number | string;
+    @Prop({ type: Boolean, default: true })
     transition?: boolean;
     @Prop()
     zIndex?: number;
-    @Prop({default: '确定'})
+    @Prop({ default: '确定' })
     closeButtonText?: string;
     @Prop()
     deleteButtonText?: string;
-    @Prop({type: Boolean, default: true})
+    @Prop({ type: Boolean, default: true })
     showDeleteKey?: boolean;
-    @Prop({type: Boolean, default: true})
+    @Prop({ type: Boolean, default: true })
     hideOnClickOutside?: boolean;
-    @Prop({type: Boolean, default: true})
+    @Prop({ type: Boolean, default: true })
     safeAreaInsetBottom?: boolean;
     @Provide()
     keyboardVisible: boolean = false;
@@ -146,8 +146,8 @@ export default class NumberKeyboardInput extends Vue {
 }
 </script>
 <style lang="less">
-    .comp-nkbi-password-input .van-password-input{
-        margin-left: 0;
-        margin-right: 0;
-    }
+.comp-nkbi-password-input .van-password-input {
+    margin-left: 0;
+    margin-right: 0;
+}
 </style>

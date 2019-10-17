@@ -1,5 +1,4 @@
-
-export async function login(params: { username: string, password: string }) {
+export async function login(params: { username: string; password: string }) {
     // return request.post('user/login', params);
     // 模拟数据
     return new Promise((resolve, reject) => {

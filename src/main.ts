@@ -5,11 +5,13 @@ import store from './store';
 import getPageTitle from '@/utils/get-page-title';
 import './registerServiceWorker';
 import './filters';
-import {Dialog, Toast, Notify} from 'vant';
+import { Dialog, Toast, Notify } from 'vant';
 
-Vue.use(Dialog).use(Toast).use(Notify);
+Vue.use(Dialog)
+    .use(Toast)
+    .use(Notify);
 
-const {VUE_APP_BUILD_ENV} = process.env;
+const { VUE_APP_BUILD_ENV } = process.env;
 
 Vue.config.productionTip = VUE_APP_BUILD_ENV === 'development';
 
@@ -21,5 +23,5 @@ router.beforeEach((to, from, next) => {
 new Vue({
     router,
     store,
-    render: (h) => h(App),
+    render: h => h(App),
 }).$mount('#app');

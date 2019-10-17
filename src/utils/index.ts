@@ -31,7 +31,10 @@ interface RemoveEmptyPropertyOptions {
  * @param obj 处理对象
  * @param options:RemoveEmptyPropertyOptions 配置参数
  */
-export const removeEmptyProperty = (obj: any|{}, options: RemoveEmptyPropertyOptions= {}) => {
+export const removeEmptyProperty = (
+    obj: any | {},
+    options: RemoveEmptyPropertyOptions = {},
+) => {
     // tslint:disable-next-line:forin
     for (const key in obj) {
         let val = obj[key];

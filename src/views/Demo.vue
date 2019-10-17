@@ -3,9 +3,9 @@
         <div class="group">
             <div class="title">支付图标</div>
             <div class="content margin">
-                <PaymentIcon code="Alipay"/>&nbsp;
-                <PaymentIcon code="WechatPay"/>&nbsp;
-                <PaymentIcon code="UnionPay_QR"/>
+                <PaymentIcon code="Alipay" />&nbsp;
+                <PaymentIcon code="WechatPay" />&nbsp;
+                <PaymentIcon code="UnionPay_QR" />
             </div>
         </div>
 
@@ -36,18 +36,18 @@
                 <Button plain type="info">朴素按钮</Button>
                 <Button plain hairline type="primary">细边框按钮</Button>
                 <Button plain hairline type="info">细边框按钮</Button>
-                <Button loading type="primary"/>
+                <Button loading type="primary" />
             </div>
         </div>
 
         <div class="group">
             <div class="title">Vant 图标</div>
             <div class="content margin icons">
-                <Icon name="close" color="red"/>
-                <Icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png"/>
-                <Icon name="chat" dot color="blue"/>
-                <Icon name="chat" info="9"/>
-                <Icon name="chat" info="99+" size="30px"/>
+                <Icon name="close" color="red" />
+                <Icon name="https://b.yzcdn.cn/vant/icon-demo-1126.png" />
+                <Icon name="chat" dot color="blue" />
+                <Icon name="chat" info="9" />
+                <Icon name="chat" info="99+" size="30px" />
             </div>
         </div>
 
@@ -70,14 +70,14 @@
         <div class="group">
             <div class="title">时间格式化</div>
             <div class="content margin">
-                <DateFormat :date="date" format="YYYY年MM月DD日 HH:mm:ss"/>
+                <DateFormat :date="date" format="YYYY年MM月DD日 HH:mm:ss" />
             </div>
         </div>
     </div>
 </template>
 <script lang="ts">
-import {Component, Vue, Provide} from 'vue-property-decorator';
-import {CellGroup, Cell, Field, Button, Icon} from 'vant';
+import { Component, Vue, Provide } from 'vue-property-decorator';
+import { CellGroup, Cell, Field, Button, Icon } from 'vant';
 import PaymentIcon from '@/components/PaymentIcon.vue';
 import DateFormat from '@/components/DateFormat.vue';
 
@@ -111,34 +111,34 @@ export default class Demo extends Vue {
 }
 </script>
 <style lang="less" scoped>
-    @import '~@/styles/vars';
+@import '~@/styles/vars';
 
-    .group {
-        margin-bottom: 12px;
+.group {
+    margin-bottom: 12px;
+}
+
+.title {
+    padding: 12px;
+    border-top: solid 1px @border-color;
+    font-weight: bold;
+}
+
+.content {
+    padding: 12px 0;
+
+    &.margin {
+        margin: 0 12px;
     }
+}
 
-    .title {
-        padding: 12px;
-        border-top: solid 1px @border-color;
-        font-weight: bold;
-    }
+.buttons button {
+    margin-right: 8px;
+    margin-bottom: 8px;
+}
 
-    .content {
-        padding: 12px 0;
-
-        &.margin {
-            margin: 0 12px;
-        }
-    }
-
-    .buttons button {
-        margin-right: 8px;
-        margin-bottom: 8px;
-    }
-
-    .icons .van-icon {
-        margin-right: 8px;
-        margin-bottom: 8px;
-        font-size: 20px;
-    }
+.icons .van-icon {
+    margin-right: 8px;
+    margin-bottom: 8px;
+    font-size: 20px;
+}
 </style>

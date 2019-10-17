@@ -1,83 +1,100 @@
 <template>
-    <span class="comp-payment_icon_item"
-          :style="iconStyle"
-          :class="{'comp-payment_icon_empty':!iconPos,'comp-payment_icon_grey':grey}">
-        <Icon name="question-o"
-              class="comp-payment_icon_notfount"
-              v-if="!iconPos"
-              :style="{fontSize:size+'px'}"
+    <span
+        class="comp-payment_icon_item"
+        :style="iconStyle"
+        :class="{
+            'comp-payment_icon_empty': !iconPos,
+            'comp-payment_icon_grey': grey,
+        }"
+    >
+        <Icon
+            name="question-o"
+            class="comp-payment_icon_notfount"
+            v-if="!iconPos"
+            :style="{ fontSize: size + 'px' }"
         />
     </span>
 </template>
 <script lang="ts">
-    import {Icon} from 'vant';
-    import {Component, Prop, Vue} from 'vue-property-decorator';
+import { Icon } from 'vant';
+import { Component, Prop, Vue } from 'vue-property-decorator';
 
-    const ICON_POS_ARRAY = [
-        ['CashPay', 'Alipay', 'WechatPay', 'UnionPay_QR', 'UnionPay', 'Visa', 'Mastercard', 'JCB', 'DinersClub', 'AmericanExpress'],
-    ];
-    const CODE_POS_MAP = (() => {
-        const map: any = {};
-        ICON_POS_ARRAY.forEach((row, y) => {
-            row.forEach((item, x) => {
-                map[item] = [x, y];
-            });
+const ICON_POS_ARRAY = [
+    [
+        'CashPay',
+        'Alipay',
+        'WechatPay',
+        'UnionPay_QR',
+        'UnionPay',
+        'Visa',
+        'Mastercard',
+        'JCB',
+        'DinersClub',
+        'AmericanExpress',
+    ],
+];
+const CODE_POS_MAP = (() => {
+    const map: any = {};
+    ICON_POS_ARRAY.forEach((row, y) => {
+        row.forEach((item, x) => {
+            map[item] = [x, y];
         });
-        return map;
-    })();
+    });
+    return map;
+})();
 
-    @Component({
-        components: {Icon},
-    })
-    export default class PaymentIcon extends Vue {
-        @Prop ({required: true})
-        public code!: string;
-        @Prop ({default: 28})
-        public size: number = 28;
-        public grey: boolean = false;
+@Component({
+    components: { Icon },
+})
+export default class PaymentIcon extends Vue {
+    @Prop({ required: true })
+    public code!: string;
+    @Prop({ default: 28 })
+    public size: number = 28;
+    public grey: boolean = false;
 
-        get iconPos() {
-            const iconPosition = CODE_POS_MAP[this.code];
-            if (iconPosition) {
-                const x = -(iconPosition[0] * this.size);
-                const y = -(iconPosition[1] * this.size);
-                return {x, y};
-            }
-            return null;
+    get iconPos() {
+        const iconPosition = CODE_POS_MAP[this.code];
+        if (iconPosition) {
+            const x = -(iconPosition[0] * this.size);
+            const y = -(iconPosition[1] * this.size);
+            return { x, y };
         }
-
-        get iconStyle() {
-            const style: any = {
-                width: this.size + 'px',
-                height: this.size + 'px',
-            };
-            if (this.iconPos) {
-                style.backgroundPosition = `${this.iconPos.x}px ${this.iconPos.y}px`;
-            }
-            return style;
-        }
+        return null;
     }
+
+    get iconStyle() {
+        const style: any = {
+            width: this.size + 'px',
+            height: this.size + 'px',
+        };
+        if (this.iconPos) {
+            style.backgroundPosition = `${this.iconPos.x}px ${this.iconPos.y}px`;
+        }
+        return style;
+    }
+}
 </script>
 <style lang="less">
-    @import "~@/styles/vars";
+@import '~@/styles/vars';
 
-    .comp-payment_icon_item{
-        display: inline-block;
-        width: 36px;
-        height: 36px;
-        background: url('~@/assets/payment-icon.png') no-repeat;
-        background-size: cover;
-        vertical-align: baseline;
-        line-height: 1;
-        &.comp-payment_icon_empty{
-            background: none;
-        }
-        &.comp-payment_icon_grey{
-            filter: grayscale(1);
-            opacity: 0.3;
-        }
-        .comp-payment_icon_notfount{
-            color: @red;
-        }
+.comp-payment_icon_item {
+    display: inline-block;
+    width: 36px;
+    height: 36px;
+    background: url('~@/assets/payment-icon.png') no-repeat;
+    background-size: cover;
+    vertical-align: baseline;
+    line-height: 1;
+    &.comp-payment_icon_empty {
+        background: none;
     }
+    &.comp-payment_icon_grey {
+        filter: grayscale(1);
+        opacity: 0.3;
+    }
+    .comp-payment_icon_notfount {
+        color: @red;
+    }
+}
 </style>

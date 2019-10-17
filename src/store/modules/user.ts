@@ -1,4 +1,4 @@
-import {login} from '@/service/user';
+import { login } from '@/service/user';
 
 export interface UserModel {
     id: number | string;
@@ -25,7 +25,7 @@ const mutations = {
 
 const actions = {
     // user login
-    async login({commit, dispatch}: any, userInfo: any) {
+    async login({ commit, dispatch }: any, userInfo: any) {
         return login(userInfo).then(async (response: any) => {
             const user = response.data;
             commit('SET_CURRENT_USER', user);
@@ -34,10 +34,9 @@ const actions = {
     },
 
     // user logout
-    logout({commit}: any) {
+    logout({ commit }: any) {
         commit('SET_CURRENT_USER', null);
     },
-
 };
 
 export default {

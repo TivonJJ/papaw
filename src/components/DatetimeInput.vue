@@ -1,20 +1,21 @@
 <template>
     <div>
         <div class="van-field__body">
-            <input :placeholder="placeholder"
-                   class="van-field__control"
-                   :value="formattedValue"
-                   readonly
-                   @click="showPicker"
+            <input
+                :placeholder="placeholder"
+                class="van-field__control"
+                :value="formattedValue"
+                readonly
+                @click="showPicker"
             />
-            <Icon v-if="clearButtonVisible"
-                  @click.stop="clear"
-                  name="clear"
-                  class="van-field__clear"/>
+            <Icon
+                v-if="clearButtonVisible"
+                @click.stop="clear"
+                name="clear"
+                class="van-field__clear"
+            />
         </div>
-        <Popup v-model="pickerVisible"
-               position="bottom"
-        >
+        <Popup v-model="pickerVisible" position="bottom">
             <DatetimePicker
                 v-model="currentPickerDate"
                 :type="type"
@@ -39,8 +40,8 @@
     </div>
 </template>
 <script lang="ts">
-import {Component, Prop, Provide, Vue, Watch} from 'vue-property-decorator';
-import {DatetimePicker, Popup, Icon} from 'vant';
+import { Component, Prop, Provide, Vue, Watch } from 'vue-property-decorator';
+import { DatetimePicker, Popup, Icon } from 'vant';
 import moment from 'moment';
 
 @Component({
@@ -53,7 +54,7 @@ import moment from 'moment';
 export default class DatetimeInput extends Vue {
     @Prop()
     placeholder?: string;
-    @Prop({default: false, type: Boolean})
+    @Prop({ default: false, type: Boolean })
     clearable?: boolean;
     @Prop()
     value?: Date | string;
@@ -67,7 +68,7 @@ export default class DatetimeInput extends Vue {
     format?: string;
     @Prop()
     title?: string;
-    @Prop({default: 'datetime'})
+    @Prop({ default: 'datetime' })
     type?: string;
     @Prop()
     minDate?: Date;
@@ -151,14 +152,14 @@ export default class DatetimeInput extends Vue {
     }
 
     get formattedValue() {
-        const {currentValue: value} = this;
+        const { currentValue: value } = this;
         if (!value) {
             return '';
         }
         if (this.type === 'time') {
             return value;
         }
-        let {format} = this;
+        let { format } = this;
         if (!format) {
             format = this.getDefaultFormat();
         }

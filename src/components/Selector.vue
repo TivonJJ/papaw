@@ -1,10 +1,11 @@
 <template>
     <div>
-        <input :placeholder="placeholder"
-               class="van-field__control"
-               readonly
-               :value="label"
-               @click.stop="showPicker"
+        <input
+            :placeholder="placeholder"
+            class="van-field__control"
+            readonly
+            :value="label"
+            @click.stop="showPicker"
         />
         <Popup v-model="pickerVisible" position="bottom">
             <Picker
@@ -21,10 +22,13 @@
 </template>
 
 <script lang="ts">
-import {Picker, Popup} from 'vant';
-import {Component, Prop, Provide, Vue, Watch} from 'vue-property-decorator';
+import { Picker, Popup } from 'vant';
+import { Component, Prop, Provide, Vue, Watch } from 'vue-property-decorator';
 
-export interface Option { label: any; value: any; }
+export interface Option {
+    label: any;
+    value: any;
+}
 
 @Component({
     components: {
@@ -33,7 +37,7 @@ export interface Option { label: any; value: any; }
     },
 })
 export default class Selector extends Vue {
-    @Prop({type: Array, default: []})
+    @Prop({ type: Array, default: [] })
     options?: Option[];
     @Prop()
     value?: any;
@@ -57,14 +61,16 @@ export default class Selector extends Vue {
         if (!this.currentValue || !this.options) {
             return 0;
         }
-        return this.options.findIndex((item) => item.value === this.currentValue);
+        return this.options.findIndex(item => item.value === this.currentValue);
     }
 
     get label() {
         if (!this.currentValue || !this.options) {
             return '';
         }
-        const item = this.options.find(({value}) => value === this.currentValue);
+        const item = this.options.find(
+            ({ value }) => value === this.currentValue,
+        );
         return item ? item.label : '';
     }
 
@@ -82,6 +88,5 @@ export default class Selector extends Vue {
         this.currentValue = item.value;
         this.hidePicker();
     }
-
 }
 </script>

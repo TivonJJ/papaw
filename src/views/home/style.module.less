@@ -1,0 +1,42 @@
+@import "~@/styles/vars";
+
+.banner {
+    display: flex;
+    align-items: center;
+    background: url("~@/assets/banner.jpg") no-repeat;
+    background-size: contain;
+    height: 53vw;
+
+    .logo {
+        display: block;
+        height: 60px;
+        margin: auto;
+    }
+}
+
+.user {
+
+    &-group {
+        margin-bottom: 15px;
+    }
+
+    &-links {
+        padding: 15px 0;
+        font-size: 12px;
+        text-align: center;
+        background-color: #fff;
+
+        :global{
+            .van-icon {
+                display: block;
+                font-size: 24px;
+            }
+        }
+    }
+}
+
+.desc {
+    font-size: 14px;
+    color: @gray-darker;
+}
+

@@ -11,5 +11,5 @@ module.exports = {
     // 主题
     theme: require('./themes/default'),
     // 路由模式 'hash' | 'history' | 'abstract'
-    router_mode: 'hash'
+    router_mode: 'history',
 };
