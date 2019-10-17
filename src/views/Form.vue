@@ -31,13 +31,11 @@
                 label="短信验证码"
                 placeholder="请输入短信验证码"
             >
-                <Button slot="button" size="small" type="primary">发送验证码</Button>
+                <Button slot="button" size="small" type="primary"
+                    >发送验证码</Button
+                >
             </PaFormItem>
-            <PaFormItem
-                v-if="showDate"
-                prop="bookTime"
-                label="预定时间"
-            >
+            <PaFormItem v-if="showDate" prop="bookTime" label="预定时间">
                 <DatetimeInput
                     slot="input"
                     v-model="form.bookTime"
@@ -55,11 +53,7 @@
                 />
             </Field>
             <Field label="预约类型">
-                <Selector
-                    slot="input"
-                    :options="types"
-                    v-model="form.type"
-                />
+                <Selector slot="input" :options="types" v-model="form.type" />
             </Field>
         </CellGroup>
         <div class="submit">
@@ -68,8 +62,8 @@
     </PaForm>
 </template>
 <script lang="ts">
-import {Component, Vue, Provide} from 'vue-property-decorator';
-import {Button, Field, CellGroup, Cell} from 'vant';
+import { Component, Vue, Provide } from 'vue-property-decorator';
+import { Button, Field, CellGroup, Cell } from 'vant';
 import NumberKeyboardInput from '@/components/NumberKeyboardInput.vue';
 import DatetimeInput from '@/components/DatetimeInput.vue';
 import Selector from '@/components/Selector.vue';
@@ -109,15 +103,24 @@ export default class UserView extends Vue {
     showDate: boolean = true;
     @Provide()
     rules: object = {
-        name: {required: true, message: '用户名不能为空'},
+        name: { required: true, message: '用户名不能为空' },
         age: [
-            {required: true, message: '年龄不能为空'},
-            {type: 'number', min: 18, transform: (val: string) => +val, message: '只允许18岁及以上的人群'},
+            { required: true, message: '年龄不能为空' },
+            {
+                type: 'number',
+                min: 18,
+                transform: (val: string) => +val,
+                message: '只允许18岁及以上的人群',
+            },
         ],
-        bookTime: {required: this.showDate, message: '预定时间不能为空'},
+        bookTime: { required: this.showDate, message: '预定时间不能为空' },
     };
     @Provide()
-    types: any[] = [{label: '上门服务', value: 'S01'}, {label: '在线服务', value: 'O02'}, {label: '补差服务', value: 'CH001'}];
+    types: any[] = [
+        { label: '上门服务', value: 'S01' },
+        { label: '在线服务', value: 'O02' },
+        { label: '补差服务', value: 'CH001' },
+    ];
 
     submit() {
         const form: any = this.$refs.form;
@@ -132,15 +135,15 @@ export default class UserView extends Vue {
 }
 </script>
 <style lang="less" scoped>
-    .header {
-        background: #fff;
-        font-size: 16px;
-        text-align: center;
-        padding: 12px;
-        margin-bottom: 16px;
-    }
+.header {
+    background: #fff;
+    font-size: 16px;
+    text-align: center;
+    padding: 12px;
+    margin-bottom: 16px;
+}
 
-    .submit {
-        margin: 12px;
-    }
+.submit {
+    margin: 12px;
+}
 </style>
