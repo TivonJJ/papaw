@@ -32,14 +32,14 @@ workbox.routing.registerNavigationRoute('/index.html');
 /**
  * Handle API requests
  */
-workbox.routing.registerRoute(/\/api\//, new workbox.strategies.networkFirst());
+workbox.routing.registerRoute(/\/api\//, new workbox.strategies.NetworkFirst());
 
 /**
  * Handle third party requests
  */
 workbox.routing.registerRoute(
     /^https:\/\/cdnjs.cloudflare.com\//,
-    new workbox.strategies.networkFirst(),
+    new workbox.strategies.NetworkFirst(),
 );
 
 /**
