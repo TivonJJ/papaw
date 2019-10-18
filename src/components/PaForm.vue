@@ -12,7 +12,6 @@ export default {
 
     data() {
         return {
-            validated: false,
             errors: null,
         };
     },
@@ -50,7 +49,6 @@ export default {
             this.$emit('reset', event);
         },
         validate(callback) {
-            this.validated = true;
             const validator = new Validator(this.rules);
             return validator.validate(this.value, (errors, fields) => {
                 this.errors = fields;
@@ -60,7 +58,6 @@ export default {
             });
         },
         _itemChangeValidate(name) {
-            if (!this.validated) return;
             if (!this.rules || !this.rules[name]) {
                 this.errors = null;
                 return;
