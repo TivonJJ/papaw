@@ -9,7 +9,7 @@ module.exports = {
     // 是否启用pwa，开发模式无效
     pwa: true,
     // 主题
-    theme: require('./themes/default'),
+    theme: 'default',
     // 路由模式 'hash' | 'history' | 'abstract'
     router_mode: 'history',
 };

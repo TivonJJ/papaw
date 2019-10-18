@@ -15,6 +15,7 @@ if ('basePath' in startParams) {
 process.env.VUE_APP_TITLE = settings.title;
 process.env.VUE_APP_BUILD_ENV = BUILD_ENV;
 settings.envconf = getEnvConf(BUILD_ENV);
+const theme = settings.theme ? require('./themes/' + settings.theme) : {};
 
 module.exports = {
     parallel: false,
@@ -30,18 +31,9 @@ module.exports = {
         },
     },
     css: {
-        requireModuleExtension: true,
         loaderOptions: {
-            css: {
-                modules: {
-                    mode: 'local',
-                    // localIdentName: "[path][name]__[local]",
-                    // context: resolve(__dirname, "src"),
-                    // hashPrefix: "papaw-"
-                },
-            },
             less: {
-                modifyVars: settings.theme,
+                modifyVars: theme,
                 javascriptEnabled: true,
             },
         },
