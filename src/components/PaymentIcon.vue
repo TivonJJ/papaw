@@ -50,7 +50,7 @@ export default class PaymentIcon extends Vue {
     @Prop({ required: true })
     public code!: string;
     @Prop({ default: 28 })
-    public size: number = 28;
+    public size: number | string = 28;
     public grey: boolean = false;
 
     get iconPos() {
@@ -64,9 +64,13 @@ export default class PaymentIcon extends Vue {
     }
 
     get iconStyle() {
+        let size = this.size;
+        if (typeof size === 'number') {
+            size = size + 'px';
+        }
         const style: any = {
-            width: this.size + 'px',
-            height: this.size + 'px',
+            width: size,
+            height: size,
         };
         if (this.iconPos) {
             style.backgroundPosition = `${this.iconPos.x}px ${this.iconPos.y}px`;
