@@ -55,9 +55,13 @@ export default class PaymentIcon extends Vue {
 
     get iconPos() {
         const iconPosition = CODE_POS_MAP[this.code];
-        if (iconPosition) {
-            const x = -(iconPosition[0] * this.size);
-            const y = -(iconPosition[1] * this.size);
+        let size = this.size;
+        if (typeof size === 'string') {
+            size = +size.replace(/[^0-9]/gi, '');
+        }
+        if (iconPosition && !isNaN(size)) {
+            const x = -(iconPosition[0] * size);
+            const y = -(iconPosition[1] * size);
             return { x, y };
         }
         return null;
