@@ -32,7 +32,7 @@ export default {
             $watchChange: key => {
                 return this.$watch(`value.${key}`, newVal => {
                     this.$emit('change', newVal, this.value);
-                    this._itemChangeValidate(key);
+                    this.validateField(key);
                 });
             },
         };
@@ -53,28 +53,40 @@ export default {
             return validator.validate(this.value, (errors, fields) => {
                 this.errors = fields;
                 if (callback) {
-                    callback(!!errors, fields);
+                    callback(!errors, fields);
                 }
             });
         },
-        _itemChangeValidate(name) {
-            if (!this.rules || !this.rules[name]) {
-                this.errors = null;
-                return;
+        validateField(props, callback) {
+            const validate = (name, callback) => {
+                if (!this.rules || !this.rules[name]) {
+                    this.errors = null;
+                    return;
+                }
+                const validator = new Validator({ [name]: this.rules[name] });
+                validator.validate(
+                    { [name]: this.value[name] },
+                    (errors, fields) => {
+                        const temp_errors = { ...this.errors };
+                        if (fields) {
+                            temp_errors[name] = fields[name];
+                        } else {
+                            delete temp_errors[name];
+                        }
+                        if (callback) {
+                            callback(temp_errors[name]);
+                        }
+                        this.errors = temp_errors;
+                    },
+                );
+            };
+            if (Array.isArray(props)) {
+                props.forEach(name => {
+                    validate(name, callback);
+                });
+            } else {
+                validate(props, callback);
             }
-            const validator = new Validator({ [name]: this.rules[name] });
-            validator.validate(
-                { [name]: this.value[name] },
-                (errors, fields) => {
-                    const temp_errors = { ...this.errors };
-                    if (fields) {
-                        temp_errors[name] = fields[name];
-                    } else {
-                        delete temp_errors[name];
-                    }
-                    this.errors = temp_errors;
-                },
-            );
         },
     },
 };

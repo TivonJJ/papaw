@@ -29,6 +29,7 @@
         :label-width="labelWidth"
         :label-align="labelAlign"
         :input-align="inputAlign"
+        :maxlength="maxlength"
         :type="type"
         @click="_throwEvent('click', $event)"
         @change="_throwEvent('change', $event)"
@@ -64,7 +65,10 @@ export default {
         size: String,
         center: Boolean,
         isLink: Boolean,
-        required: Boolean,
+        required: {
+            type: Boolean,
+            default: undefined,
+        },
         clickable: Boolean,
         titleStyle: null,
         titleClass: null,
@@ -92,6 +96,7 @@ export default {
             type: String,
             default: 'text',
         },
+        maxlength: [Number, String],
     },
     components: { Field },
     inject: ['$errors', '$rules', '$watchChange'],
@@ -112,7 +117,7 @@ export default {
             return '';
         },
         isRequired() {
-            if (this.hasOwnProperty('required')) {
+            if (this.required !== undefined) {
                 return this.required;
             }
             if (this.$rules && this.$rules[this.prop]) {
