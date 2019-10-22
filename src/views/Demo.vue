@@ -55,7 +55,7 @@
             <div class="title">预置CSS类</div>
             <div class="content margin">
                 <div class="text-primary">主要颜色文字</div>
-                <div class="text-primary">成功颜色文字</div>
+                <div class="text-success">成功颜色文字</div>
                 <div class="text-danger">错误颜色文字</div>
                 <div class="text-warning">警告颜色文字</div>
                 <div class="text-muted">灰色辅助文字</div>
