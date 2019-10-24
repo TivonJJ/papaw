@@ -1,6 +1,6 @@
 <template>
     <div class="pa-spin">
-        <div v-if="busy" class="pa-spin-nested-loading">
+        <div v-if="busy" class="pa-spin-nested-loading" :style="{ color }">
             <Loading
                 :type="type"
                 :color="color"
@@ -96,7 +96,7 @@ export default class Selector extends Vue {
     left: 50%;
     margin: -20px -10px -10px -10px;
     .van-loading__text {
-        color: @primary-color;
+        color: inherit;
     }
 }
 .pa-spin-container {
