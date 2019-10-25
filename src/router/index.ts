@@ -35,6 +35,13 @@ const routes = [
         component: () =>
             import(/* webpackChunkName: "form" */ '@/views/Form.vue'),
     },
+    {
+        path: '/model',
+        name: 'model',
+        meta: { title: 'model演示页面' },
+        component: () =>
+            import(/* webpackChunkName: "model" */ '@/views/Model.vue'),
+    },
 ];
 
 const router = new VueRouter({

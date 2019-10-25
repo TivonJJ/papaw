@@ -49,6 +49,7 @@ class Home extends Vue {
                 <CellGroup>
                     <Cell icon="apps-o" title="组件示例" is-link to="demo" />
                     <Cell icon="user-o" title="Vuex示例" is-link to="user" />
+                    <Cell icon="user-o" title="Vuex示例2" is-link to="model" />
                     <Cell
                         icon="notes-o"
                         title="Form表单示例"

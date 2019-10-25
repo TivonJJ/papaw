@@ -93,7 +93,7 @@ interface Form {
         PaFormItem,
     },
 })
-export default class UserView extends Vue {
+export default class FormView extends Vue {
     @Provide()
     form: Form = {
         bookTime: new Date(),
