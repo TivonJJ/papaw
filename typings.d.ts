@@ -6,12 +6,14 @@ declare module '*.jpeg';
 declare module '*.gif';
 
 interface Window {
-    startParams: any;
     app: any;
+    Settings: any;
+    StartParams: any;
 }
 
-declare const Settings: any;
-declare const StartParams: any;
+declare var app: any;
+declare var Settings: any;
+declare var StartParams: any;
 
 declare module 'join-path';
 declare module 'classnames';

@@ -15,7 +15,7 @@ router.beforeEach((to, from, next) => {
     next();
 });
 
-new Vue({
+window.app = new Vue({
     router,
     store,
     render: h => h(App),
