@@ -80,6 +80,9 @@ window.lightGoCallBack = function(id: string, data: string) {
             code: -1,
             data: e,
         });
+    } finally {
+        callback[id] = undefined;
+        delete callback[id];
     }
 };
 
