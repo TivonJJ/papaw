@@ -42,6 +42,13 @@ const routes = [
         component: () =>
             import(/* webpackChunkName: "model" */ '@/views/Model.vue'),
     },
+    {
+        path: '/lightGo',
+        name: 'lightGo',
+        meta: { title: 'lightGo' },
+        component: () =>
+            import(/* webpackChunkName: "lightGo" */ '@/views/lightGo.vue'),
+    },
 ];
 
 const router = new VueRouter({

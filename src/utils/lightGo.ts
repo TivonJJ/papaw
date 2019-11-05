@@ -50,7 +50,9 @@ const lightGoCallbacks = {} as any;
 const lightGo = {} as LightGoUtil;
 
 syncFn.forEach(name => {
-    lightGo[name] = window.lightGo[name];
+    lightGo[name] = function(...args: any) {
+        return window.lightGo[name](...args);
+    };
 });
 asyncFn.forEach(name => {
     lightGo[name] = function(...args: any) {
