@@ -35,9 +35,14 @@
                     >发送验证码</Button
                 >
             </PaFormItem>
-            <PaFormItem v-if="showDate" prop="bookTime" label="预定时间">
+            {{ form.bookTime }}
+            <PaFormItem
+                v-if="showDate"
+                prop="bookTime"
+                label="预定时间"
+                :rule="{ required: true, message: '预定时间不能为空' }"
+            >
                 <DatetimeInput
-                    slot="input"
                     v-model="form.bookTime"
                     clearable
                     type="datetime"
@@ -46,18 +51,21 @@
             </PaFormItem>
             <Field label="核销密码">
                 <NumberKeyboardInput
-                    slot="input"
                     v-model="form.transPwd"
                     theme="custom"
                     type="password"
                 />
             </Field>
             <Field label="预约类型">
-                <Selector slot="input" :options="types" v-model="form.type" />
+                <Selector :options="types" v-model="form.type" />
             </Field>
         </CellGroup>
         <div class="submit">
             <Button type="info" block @click="submit">提交</Button>
+        </div>
+        <div>
+            <Button size="mini" @click="showDate = true">动态增加</Button>
+            <Button size="mini" @click="showDate = false">动态删除</Button>
         </div>
     </PaForm>
 </template>
@@ -96,7 +104,7 @@ interface Form {
 export default class FormView extends Vue {
     @Provide()
     form: Form = {
-        bookTime: new Date(),
+        bookTime: undefined,
         type: 'O02',
     };
     @Provide()
@@ -113,7 +121,6 @@ export default class FormView extends Vue {
                 message: '只允许18岁及以上的人群',
             },
         ],
-        bookTime: { required: this.showDate, message: '预定时间不能为空' },
     };
     @Provide()
     types: any[] = [
@@ -125,8 +132,8 @@ export default class FormView extends Vue {
     submit() {
         const form: any = this.$refs.form;
         form.validate((valid: boolean) => {
-            if (valid) {
-                // this.$toast.fail('验证不通过');
+            if (!valid) {
+                this.$toast.fail('验证不通过');
                 return;
             }
             this.$toast.success('验证通过，开始提交');

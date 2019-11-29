@@ -41,7 +41,7 @@
         @click-right-icon="_throwEvent('click-right-icon', $event)"
     >
         <slot name="label" slot="label" />
-        <slot name="input" slot="input" />
+        <slot slot="input" ref="c" />
         <slot name="left-icon" slot="left-icon" />
         <slot name="right-icon" slot="right-icon" />
         <slot name="button" slot="button" />
@@ -97,9 +97,21 @@ export default {
             default: 'text',
         },
         maxlength: [Number, String],
+        rule: null,
+        clearOnDestroy: {
+            type: Boolean,
+            default: true,
+        },
     },
     components: { Field },
-    inject: ['$errors', '$rules', '$watchChange'],
+    inject: [
+        '$errors',
+        '$rules',
+        '$watchChange',
+        '$addRule',
+        '$removeRule',
+        '$setValue',
+    ],
 
     computed: {
         currentError() {
@@ -132,15 +144,30 @@ export default {
         },
     },
 
+    created() {
+        if (this.rule) {
+            this.$addRule(this.prop, this.rule);
+        }
+    },
+
     mounted() {
         if (this.prop) {
             this.cancelChangeWatcher = this.$watchChange(this.prop);
         }
     },
 
+    beforeDestroy() {
+        if (this.clearOnDestroy) {
+            this.$setValue(this.prop, undefined);
+        }
+    },
+
     destroyed() {
         if (this.cancelChangeWatcher) {
             this.cancelChangeWatcher();
+        }
+        if (this.rule) {
+            this.$removeRule(this.prop, this.rule);
         }
     },
 

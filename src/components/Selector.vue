@@ -7,7 +7,7 @@
             :value="label"
             @click.stop="showPicker"
         />
-        <Popup v-model="pickerVisible" position="bottom">
+        <Popup v-model="pickerVisible" position="bottom" get-container="body">
             <Picker
                 show-toolbar
                 ref="picker"
@@ -43,6 +43,8 @@ export default class Selector extends Vue {
     value?: any;
     @Prop()
     placeholder?: string;
+    @Prop()
+    optionKey?: any;
     @Provide()
     pickerVisible: boolean = false;
     @Provide()
@@ -58,20 +60,32 @@ export default class Selector extends Vue {
     }
 
     get valueIndex() {
-        if (!this.currentValue || !this.options) {
-            return 0;
-        }
-        return this.options.findIndex(item => item.value === this.currentValue);
+        const found: any = this.findItemByValue(this.currentValue);
+        return found ? found.index : 0;
     }
 
     get label() {
-        if (!this.currentValue || !this.options) {
-            return '';
+        const found: any = this.findItemByValue(this.currentValue);
+        return found ? found.item.label : '';
+    }
+
+    findItemByValue(value: any) {
+        if (!value || !this.options) {
+            return null;
         }
-        const item = this.options.find(
-            ({ value }) => value === this.currentValue,
-        );
-        return item ? item.label : '';
+        for (let i = 0; i < this.options.length; i++) {
+            const item: any = this.options[i];
+            if (this.optionKey) {
+                if (item.value[this.optionKey] === value[this.optionKey]) {
+                    return { item, index: i };
+                }
+            } else {
+                if (item.value === value) {
+                    return { item, index: i };
+                }
+            }
+        }
+        return null;
     }
 
     showPicker() {

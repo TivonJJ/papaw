@@ -94,7 +94,6 @@ export default class Selector extends Vue {
     position: absolute;
     top: 50%;
     left: 50%;
-    margin: -20px -10px -10px -10px;
     .van-loading__text {
         color: inherit;
     }

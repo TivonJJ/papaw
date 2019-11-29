@@ -35,6 +35,23 @@ export default {
                     this.validateField(key);
                 });
             },
+            $addRule: (name, rule) => {
+                console.log('add rule');
+                if (!this.rules) this.rules = {};
+                this.rules[name] = rule;
+                return this.rules;
+            },
+            $removeRule: name => {
+                if (!this.rules) return;
+                this.rules[name] = undefined;
+                delete this.rules[name];
+                return this.rules;
+            },
+            $setValue: (name, value) => {
+                if (this.value) {
+                    this.value[name] = value;
+                }
+            },
         };
     },
 

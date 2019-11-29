@@ -1,9 +1,10 @@
 <template>
-    <div>
+    <div class="comp-nkbi-password">
         <div v-if="type === 'v-password'" class="comp-nkbi-password-input">
             <PasswordInput
+                :disabled="disabled"
                 style="margin: 0"
-                :value="currentValue"
+                :value="formattedValue"
                 :info="placeholder"
                 :focused="keyboardVisible"
                 :mask="mask"
@@ -15,14 +16,16 @@
             <input
                 :placeholder="placeholder"
                 class="van-field__control"
-                :value="currentValue"
+                :value="formattedValue"
                 :type="type"
+                :disabled="disabled"
                 readonly
                 @touchstart.stop="showKeyboard"
             />
         </template>
         <NumberKeyboard
             ref="numberKeyboard"
+            class="comp-nkbi-password_board"
             :show="keyboardVisible"
             :extra-key="extraKey"
             :theme="theme"
@@ -36,7 +39,6 @@
             :hide-on-click-outside="hideOnClickOutside"
             :safe-area-inset-bottom="safeAreaInsetBottom"
             v-model="_value"
-            @input="onInput"
             @blur="onBlur"
             @delete="onDelete"
             @close="onClose"
@@ -60,8 +62,12 @@ export default class NumberKeyboardInput extends Vue {
     type?: string;
     @Prop({ type: Boolean, default: true })
     mask?: boolean;
+    @Prop({ type: Boolean, default: false })
+    disabled?: boolean;
     @Prop()
     gutter?: number | string;
+    @Prop()
+    formatter?: (value: string) => string;
     @Prop()
     value?: string | number;
     @Prop()
@@ -111,7 +117,15 @@ export default class NumberKeyboardInput extends Vue {
         this.$emit('input', value);
     }
 
+    get formattedValue() {
+        if (!this.formatter) {
+            return this._value;
+        }
+        return this.formatter(this._value);
+    }
+
     showKeyboard() {
+        if (this.disabled) return;
         this.keyboardVisible = true;
     }
 
@@ -122,10 +136,6 @@ export default class NumberKeyboardInput extends Vue {
     onBlur(...args: any) {
         this.hideKeyboard();
         this.$emit('blur', ...args);
-    }
-
-    onInput(...args: any) {
-        this.$emit('input', ...args);
     }
 
     onDelete(...args: any) {
@@ -149,5 +159,9 @@ export default class NumberKeyboardInput extends Vue {
 .comp-nkbi-password-input .van-password-input {
     margin-left: 0;
     margin-right: 0;
+}
+.van-field--error .comp-nkbi-password_board {
+    color: initial;
+    -webkit-text-fill-color: initial;
 }
 </style>
