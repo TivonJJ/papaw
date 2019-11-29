@@ -35,13 +35,7 @@
                     >发送验证码</Button
                 >
             </PaFormItem>
-            {{ form.bookTime }}
-            <PaFormItem
-                v-if="showDate"
-                prop="bookTime"
-                label="预定时间"
-                :rule="{ required: true, message: '预定时间不能为空' }"
-            >
+            <PaFormItem v-if="showDate" prop="bookTime" label="预定时间">
                 <DatetimeInput
                     v-model="form.bookTime"
                     clearable
@@ -121,6 +115,7 @@ export default class FormView extends Vue {
                 message: '只允许18岁及以上的人群',
             },
         ],
+        bookTime: { required: true, message: '预定时间不能为空' },
     };
     @Provide()
     types: any[] = [

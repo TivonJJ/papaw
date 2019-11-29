@@ -111,6 +111,8 @@ export default {
         '$addRule',
         '$removeRule',
         '$setValue',
+        '$addItem',
+        '$removeItem',
     ],
 
     computed: {
@@ -132,8 +134,9 @@ export default {
             if (this.required !== undefined) {
                 return this.required;
             }
-            if (this.$rules && this.$rules[this.prop]) {
-                const rule = this.$rules[this.prop];
+            const rules = this.$rules() || {};
+            const rule = rules[this.prop];
+            if (rule) {
                 if (Array.isArray(rule)) {
                     return rule.some(item => item.required === true);
                 } else {
@@ -145,6 +148,7 @@ export default {
     },
 
     created() {
+        this.$addItem(this.prop);
         if (this.rule) {
             this.$addRule(this.prop, this.rule);
         }
@@ -163,6 +167,7 @@ export default {
     },
 
     destroyed() {
+        this.$removeItem(this.prop);
         if (this.cancelChangeWatcher) {
             this.cancelChangeWatcher();
         }

@@ -13,6 +13,7 @@ export default {
     data() {
         return {
             errors: null,
+            availableRules: {},
         };
     },
 
@@ -27,7 +28,7 @@ export default {
 
     provide() {
         return {
-            $rules: this.rules,
+            $rules: () => this.availableRules,
             $errors: () => this.errors,
             $watchChange: key => {
                 return this.$watch(`value.${key}`, newVal => {
@@ -52,6 +53,15 @@ export default {
                     this.value[name] = value;
                 }
             },
+            $addItem: name => {
+                if (this.rules[name]) {
+                    this.availableRules[name] = this.rules[name];
+                }
+            },
+            $removeItem: name => {
+                this.availableRules[name] = undefined;
+                delete this.availableRules[name];
+            },
         };
     },
 
@@ -66,7 +76,7 @@ export default {
             this.$emit('reset', event);
         },
         validate(callback) {
-            const validator = new Validator(this.rules);
+            const validator = new Validator(this.availableRules);
             return validator.validate(this.value, (errors, fields) => {
                 this.errors = fields;
                 if (callback) {
@@ -76,11 +86,13 @@ export default {
         },
         validateField(props, callback) {
             const validate = (name, callback) => {
-                if (!this.rules || !this.rules[name]) {
+                if (!this.availableRules || !this.availableRules[name]) {
                     this.errors = null;
                     return;
                 }
-                const validator = new Validator({ [name]: this.rules[name] });
+                const validator = new Validator({
+                    [name]: this.availableRules[name],
+                });
                 validator.validate(
                     { [name]: this.value[name] },
                     (errors, fields) => {

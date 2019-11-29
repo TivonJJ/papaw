@@ -15,7 +15,7 @@
                 class="van-field__clear"
             />
         </div>
-        <Popup v-model="pickerVisible" position="bottom">
+        <Popup v-model="pickerVisible" position="bottom" get-container="body">
             <DatetimePicker
                 v-model="currentPickerDate"
                 :type="type"
