@@ -41,7 +41,7 @@
         @click-right-icon="_throwEvent('click-right-icon', $event)"
     >
         <slot name="label" slot="label" />
-        <slot slot="input" ref="c" />
+        <slot slot="input" />
         <slot name="left-icon" slot="left-icon" />
         <slot name="right-icon" slot="right-icon" />
         <slot name="button" slot="button" />
