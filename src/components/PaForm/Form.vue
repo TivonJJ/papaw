@@ -13,54 +13,53 @@ export default {
     data() {
         return {
             errors: null,
-            availableRules: {},
+            childRules: {},
         };
     },
 
     props: {
-        value: {
+        model: {
             type: Object,
         },
         rules: {
             type: Object,
+            default: () => {},
         },
+    },
+
+    created() {
+        if (this.rules && !this.model) {
+            throw new Error('If use validate rules, The model is required');
+        }
     },
 
     provide() {
         return {
-            $rules: () => this.availableRules,
+            $rules: () => this.getValidatorRules(),
             $errors: () => this.errors,
             $watchChange: key => {
-                return this.$watch(`value.${key}`, newVal => {
-                    this.$emit('change', newVal, this.value);
+                return this.$watch(`model.${key}`, (newVal, oldVal) => {
+                    if (newVal === oldVal) return;
+                    this.$emit('change', newVal, this.model);
                     this.validateField(key);
                 });
             },
             $addRule: (name, rule) => {
-                console.log('add rule');
-                if (!this.rules) this.rules = {};
-                this.rules[name] = rule;
-                return this.rules;
+                if (!this.model) {
+                    throw new Error(
+                        'If use validate rules, The model is required',
+                    );
+                }
+                this.childRules[name] = rule;
             },
             $removeRule: name => {
-                if (!this.rules) return;
-                this.rules[name] = undefined;
-                delete this.rules[name];
-                return this.rules;
+                this.childRules[name] = undefined;
+                delete this.childRules[name];
             },
             $setValue: (name, value) => {
-                if (this.value) {
-                    this.value[name] = value;
+                if (this.model) {
+                    this.model[name] = value;
                 }
-            },
-            $addItem: name => {
-                if (this.rules[name]) {
-                    this.availableRules[name] = this.rules[name];
-                }
-            },
-            $removeItem: name => {
-                this.availableRules[name] = undefined;
-                delete this.availableRules[name];
             },
         };
     },
@@ -71,13 +70,17 @@ export default {
         },
         reset() {
             this.$refs.form.reset();
+            this.errors = null;
         },
         onReset(event) {
             this.$emit('reset', event);
         },
+        getValidatorRules() {
+            return { ...this.rules, ...this.childRules };
+        },
         validate(callback) {
-            const validator = new Validator(this.availableRules);
-            return validator.validate(this.value, (errors, fields) => {
+            const validator = new Validator(this.getValidatorRules());
+            return validator.validate(this.model, (errors, fields) => {
                 this.errors = fields;
                 if (callback) {
                     callback(!errors, fields);
@@ -85,16 +88,20 @@ export default {
             });
         },
         validateField(props, callback) {
+            const validatorRules = this.getValidatorRules();
             const validate = (name, callback) => {
-                if (!this.availableRules || !this.availableRules[name]) {
-                    this.errors = null;
+                if (!validatorRules[name]) {
+                    if (this.errors) {
+                        this.errors[name] = undefined;
+                        delete this.errors[name];
+                    }
                     return;
                 }
                 const validator = new Validator({
-                    [name]: this.availableRules[name],
+                    [name]: validatorRules[name],
                 });
                 validator.validate(
-                    { [name]: this.value[name] },
+                    { [name]: this.model[name] },
                     (errors, fields) => {
                         const temp_errors = { ...this.errors };
                         if (fields) {

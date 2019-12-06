@@ -1,5 +1,5 @@
 <template>
-    <PaForm v-model="form" :rules="rules" ref="form">
+    <PaForm :model.sync="form" :rules="fixedRules" ref="form">
         <div class="header">表单示列</div>
         <CellGroup>
             <PaFormItem
@@ -7,6 +7,7 @@
                 v-model="form.name"
                 label="用户名"
                 placeholder="请输入用户名"
+                :rule="rules.name"
             />
             <PaFormItem
                 prop="age"
@@ -14,6 +15,7 @@
                 label="年龄"
                 type="number"
                 placeholder="真实年龄"
+                :rule="rules.age"
             />
             <PaFormItem
                 prop="phone"
@@ -35,7 +37,12 @@
                     >发送验证码</Button
                 >
             </PaFormItem>
-            <PaFormItem v-if="showDate" prop="bookTime" label="预定时间">
+            <PaFormItem
+                v-if="showDate"
+                prop="bookTime"
+                :rule="rules.bookTime"
+                label="预定时间"
+            >
                 <DatetimeInput
                     v-model="form.bookTime"
                     clearable
@@ -43,16 +50,16 @@
                     placeholder="请选择预约时间"
                 />
             </PaFormItem>
-            <Field label="核销密码">
+            <PaFormItem label="核销密码" prop="transPwd">
                 <NumberKeyboardInput
                     v-model="form.transPwd"
                     theme="custom"
                     type="password"
                 />
-            </Field>
-            <Field label="预约类型">
+            </PaFormItem>
+            <PaFormItem label="预约类型" prop="type">
                 <Selector :options="types" v-model="form.type" />
-            </Field>
+            </PaFormItem>
         </CellGroup>
         <div class="submit">
             <Button type="info" block @click="submit">提交</Button>
@@ -69,8 +76,8 @@ import { Button, Field, CellGroup, Cell } from 'vant';
 import NumberKeyboardInput from '@/components/NumberKeyboardInput.vue';
 import DatetimeInput from '@/components/DatetimeInput.vue';
 import Selector from '@/components/Selector.vue';
-import PaForm from '@/components/PaForm.vue';
-import PaFormItem from '@/components/PaFormItem.vue';
+import PaForm from '@/components/PaForm/Form.vue';
+import PaFormItem from '@/components/PaForm/FormItem.vue';
 
 interface Form {
     name?: string;
@@ -116,6 +123,10 @@ export default class FormView extends Vue {
             },
         ],
         bookTime: { required: true, message: '预定时间不能为空' },
+    };
+    @Provide()
+    fixedRules: object = {
+        transPwd: { required: true, message: '核销密码不能为空' },
     };
     @Provide()
     types: any[] = [

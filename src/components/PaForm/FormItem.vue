@@ -111,8 +111,6 @@ export default {
         '$addRule',
         '$removeRule',
         '$setValue',
-        '$addItem',
-        '$removeItem',
     ],
 
     computed: {
@@ -148,7 +146,6 @@ export default {
     },
 
     created() {
-        this.$addItem(this.prop);
         if (this.rule) {
             this.$addRule(this.prop, this.rule);
         }
@@ -167,7 +164,6 @@ export default {
     },
 
     destroyed() {
-        this.$removeItem(this.prop);
         if (this.cancelChangeWatcher) {
             this.cancelChangeWatcher();
         }
