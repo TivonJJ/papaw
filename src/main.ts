@@ -15,6 +15,29 @@ router.beforeEach((to, from, next) => {
     next();
 });
 
+// Extend finally method to Promise's prototype if it dose not exist
+function PromiseFinally(f: any) {
+    // @ts-ignore
+    return this.then(
+        function(value: any) {
+            return Promise.resolve(f(null, value)).then(function() {
+                return value;
+            });
+        },
+        function(err: any) {
+            return Promise.resolve(f(err)).then(function() {
+                throw err;
+            });
+        },
+    );
+}
+if (!Promise.prototype.finally) {
+    Promise.prototype.finally = PromiseFinally;
+}
+if (!window.Promise.prototype.finally) {
+    window.Promise.prototype.finally = PromiseFinally;
+}
+
 window.app = new Vue({
     router,
     store,
