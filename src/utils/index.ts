@@ -1,5 +1,6 @@
 // tslint:disable-next-line:no-var-requires
 // const crypto = require('crypto');
+import joinPath from 'join-path';
 
 /**
  * 数组去重
@@ -113,4 +114,12 @@ export const toBoolean = (val: any) => {
         default:
             return !!val;
     }
+};
+
+/**
+ * 获取页面相对于basePath的路径
+ * @param path
+ */
+export const getPublicPath = (path?: string) => {
+    return joinPath(Settings.basePath, path);
 };

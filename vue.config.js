@@ -12,8 +12,9 @@ const startParams = getStartParams();
 if ('basePath' in startParams) {
     settings.basePath = startParams.basePath;
 }
-process.env.VUE_APP_TITLE = settings.title;
-process.env.VUE_APP_BUILD_ENV = BUILD_ENV;
+env.VUE_APP_TITLE = settings.title;
+env.VUE_APP_BUILD_ENV = BUILD_ENV;
+env.VUE_APP_BASE_PATH = settings.basePath;
 settings.envconf = getEnvConf(BUILD_ENV);
 const theme = settings.theme ? require('./themes/' + settings.theme) : {};
 

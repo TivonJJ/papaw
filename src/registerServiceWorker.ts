@@ -4,7 +4,7 @@ const { VUE_APP_BUILD_ENV } = process.env;
 
 if (Settings.pwa && VUE_APP_BUILD_ENV !== 'development') {
     console.log('register PWA');
-    register(`${process.env.BASE_URL}service-worker.js`, {
+    register(`${Settings.basePath}service-worker.js`, {
         ready() {
             console.log(
                 'App is being served from cache by a service worker.\n' +

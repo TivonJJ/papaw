@@ -53,7 +53,7 @@ const routes = [
 
 const router = new VueRouter({
     mode: Settings.router_mode,
-    base: process.env.BASE_URL,
+    base: Settings.basePath,
     routes,
 });
 
