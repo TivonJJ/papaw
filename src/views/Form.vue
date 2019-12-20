@@ -1,5 +1,5 @@
 <template>
-    <PaForm :model.sync="form" :rules="fixedRules" ref="form">
+    <PaForm :model="form" ref="form">
         <div class="header">表单示列</div>
         <CellGroup>
             <PaFormItem

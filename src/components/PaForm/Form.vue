@@ -13,17 +13,14 @@ export default {
     data() {
         return {
             errors: null,
-            childRules: {},
+            rules: {},
+            shouldValidate: false,
         };
     },
 
     props: {
         model: {
             type: Object,
-        },
-        rules: {
-            type: Object,
-            default: () => {},
         },
     },
 
@@ -50,11 +47,11 @@ export default {
                         'If use validate rules, The model is required',
                     );
                 }
-                this.childRules[name] = rule;
+                this.rules[name] = rule;
             },
             $removeRule: name => {
-                this.childRules[name] = undefined;
-                delete this.childRules[name];
+                this.rules[name] = undefined;
+                delete this.rules[name];
             },
             $setValue: (name, value) => {
                 if (this.model) {
@@ -76,9 +73,10 @@ export default {
             this.$emit('reset', event);
         },
         getValidatorRules() {
-            return { ...this.rules, ...this.childRules };
+            return { ...this.rules };
         },
         validate(callback) {
+            this.shouldValidate = true;
             const validator = new Validator(this.getValidatorRules());
             return validator.validate(this.model, (errors, fields) => {
                 this.errors = fields;
@@ -88,6 +86,7 @@ export default {
             });
         },
         validateField(props, callback) {
+            if (!this.shouldValidate) return;
             const validatorRules = this.getValidatorRules();
             const validate = (name, callback) => {
                 if (!validatorRules[name]) {
