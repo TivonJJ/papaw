@@ -58,6 +58,9 @@ export default {
                     this.model[name] = value;
                 }
             },
+            $removeProperty: name => {
+                delete this.model[name];
+            },
         };
     },
 

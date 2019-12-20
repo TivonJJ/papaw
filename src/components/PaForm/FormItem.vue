@@ -111,6 +111,7 @@ export default {
         '$addRule',
         '$removeRule',
         '$setValue',
+        '$removeProperty',
     ],
 
     computed: {
@@ -159,7 +160,7 @@ export default {
 
     beforeDestroy() {
         if (this.clearOnDestroy) {
-            this.$setValue(this.name, undefined);
+            this.$removeProperty(this.name);
         }
     },
 
