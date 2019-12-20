@@ -32,7 +32,7 @@ export default {
 
     provide() {
         return {
-            $rules: () => this.getValidatorRules(),
+            $rulesMap: () => this.getValidatorRules(),
             $errors: () => this.errors,
             $watchChange: key => {
                 return this.$watch(`model.${key}`, (newVal, oldVal) => {

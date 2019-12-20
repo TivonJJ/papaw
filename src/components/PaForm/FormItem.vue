@@ -97,7 +97,7 @@ export default {
             default: 'text',
         },
         maxlength: [Number, String],
-        rule: null,
+        rules: null,
         clearOnDestroy: {
             type: Boolean,
             default: true,
@@ -106,7 +106,7 @@ export default {
     components: { Field },
     inject: [
         '$errors',
-        '$rules',
+        '$rulesMap',
         '$watchChange',
         '$addRule',
         '$removeRule',
@@ -132,13 +132,13 @@ export default {
             if (this.required !== undefined) {
                 return this.required;
             }
-            const rules = this.$rules() || {};
-            const rule = rules[this.name];
-            if (rule) {
-                if (Array.isArray(rule)) {
-                    return rule.some(item => item.required === true);
+            const rulesMap = this.$rulesMap() || {};
+            const rules = rulesMap[this.name];
+            if (rules) {
+                if (Array.isArray(rules)) {
+                    return rules.some(item => item.required === true);
                 } else {
-                    return rule.required === true;
+                    return rules.required === true;
                 }
             }
             return false;
@@ -146,8 +146,8 @@ export default {
     },
 
     created() {
-        if (this.rule) {
-            this.$addRule(this.name, this.rule);
+        if (this.rules) {
+            this.$addRule(this.name, this.rules);
         }
     },
 
@@ -167,8 +167,8 @@ export default {
         if (this.cancelChangeWatcher) {
             this.cancelChangeWatcher();
         }
-        if (this.rule) {
-            this.$removeRule(this.name, this.rule);
+        if (this.rules) {
+            this.$removeRule(this.name, this.rules);
         }
     },
 

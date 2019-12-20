@@ -7,7 +7,7 @@
                 v-model="form.name"
                 label="用户名"
                 placeholder="请输入用户名"
-                :rule="rules.name"
+                :rules="rules.name"
             />
             <PaFormItem
                 name="age"
@@ -15,7 +15,7 @@
                 label="年龄"
                 type="number"
                 placeholder="真实年龄"
-                :rule="rules.age"
+                :rules="rules.age"
             />
             <PaFormItem
                 name="phone"
@@ -40,7 +40,7 @@
             <PaFormItem
                 v-if="showDate"
                 name="bookTime"
-                :rule="rules.bookTime"
+                :rules="rules.bookTime"
                 label="预定时间"
             >
                 <DatetimeInput
