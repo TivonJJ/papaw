@@ -54,7 +54,7 @@ import { Field } from 'vant';
 export default {
     name: 'PaFormItem',
     props: {
-        prop: {
+        name: {
             type: String,
             required: true,
         },
@@ -119,10 +119,10 @@ export default {
                 return this.errorMessage;
             }
             const errors = this.$errors();
-            if (!errors || !this.prop) {
+            if (!errors || !this.name) {
                 return '';
             }
-            const error = errors[this.prop];
+            const error = errors[this.name];
             if (error && error.length > 0 && error[0]) {
                 return error[0].message;
             }
@@ -133,7 +133,7 @@ export default {
                 return this.required;
             }
             const rules = this.$rules() || {};
-            const rule = rules[this.prop];
+            const rule = rules[this.name];
             if (rule) {
                 if (Array.isArray(rule)) {
                     return rule.some(item => item.required === true);
@@ -147,19 +147,19 @@ export default {
 
     created() {
         if (this.rule) {
-            this.$addRule(this.prop, this.rule);
+            this.$addRule(this.name, this.rule);
         }
     },
 
     mounted() {
-        if (this.prop) {
-            this.cancelChangeWatcher = this.$watchChange(this.prop);
+        if (this.name) {
+            this.cancelChangeWatcher = this.$watchChange(this.name);
         }
     },
 
     beforeDestroy() {
         if (this.clearOnDestroy) {
-            this.$setValue(this.prop, undefined);
+            this.$setValue(this.name, undefined);
         }
     },
 
@@ -168,7 +168,7 @@ export default {
             this.cancelChangeWatcher();
         }
         if (this.rule) {
-            this.$removeRule(this.prop, this.rule);
+            this.$removeRule(this.name, this.rule);
         }
     },
 

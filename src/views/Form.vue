@@ -3,14 +3,14 @@
         <div class="header">表单示列</div>
         <CellGroup>
             <PaFormItem
-                prop="name"
+                name="name"
                 v-model="form.name"
                 label="用户名"
                 placeholder="请输入用户名"
                 :rule="rules.name"
             />
             <PaFormItem
-                prop="age"
+                name="age"
                 v-model="form.age"
                 label="年龄"
                 type="number"
@@ -18,7 +18,7 @@
                 :rule="rules.age"
             />
             <PaFormItem
-                prop="phone"
+                name="phone"
                 v-model="form.phone"
                 label="手机号"
                 type="tel"
@@ -26,7 +26,7 @@
                 placeholder="11位手机号"
             />
             <PaFormItem
-                prop="sms"
+                name="sms"
                 v-model="form.sms"
                 center
                 clearable
@@ -39,7 +39,7 @@
             </PaFormItem>
             <PaFormItem
                 v-if="showDate"
-                prop="bookTime"
+                name="bookTime"
                 :rule="rules.bookTime"
                 label="预定时间"
             >
@@ -50,14 +50,14 @@
                     placeholder="请选择预约时间"
                 />
             </PaFormItem>
-            <PaFormItem label="核销密码" prop="transPwd">
+            <PaFormItem label="核销密码" name="transPwd">
                 <NumberKeyboardInput
                     v-model="form.transPwd"
                     theme="custom"
                     type="password"
                 />
             </PaFormItem>
-            <PaFormItem label="预约类型" prop="type">
+            <PaFormItem label="预约类型" name="type">
                 <Selector :options="types" v-model="form.type" />
             </PaFormItem>
         </CellGroup>
