@@ -90,7 +90,7 @@ export default class PaymentIcon extends Vue {
     display: inline-block;
     width: 36px;
     height: 36px;
-    background: url('~@/assets/payment-icon.png') no-repeat;
+    background: url('./payment-icon.png') no-repeat;
     background-size: cover;
     vertical-align: baseline;
     line-height: 1;

@@ -78,7 +78,7 @@
 <script lang="ts">
 import { Component, Vue, Provide } from 'vue-property-decorator';
 import { CellGroup, Cell, Field, Button, Icon } from 'vant';
-import PaymentIcon from '@/components/PaymentIcon.vue';
+import PaymentIcon from '@/components/PaymentIcon/index.vue';
 import DateFormat from '@/components/DateFormat.vue';
 
 @Component({
