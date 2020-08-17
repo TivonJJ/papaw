@@ -39,6 +39,7 @@
         @clear="_throwEvent('clear', $event)"
         @click-left-icon="_throwEvent('click-left-icon', $event)"
         @click-right-icon="_throwEvent('click-right-icon', $event)"
+        class="pa-form-item"
     >
         <slot name="label" slot="label" />
         <slot slot="input" />

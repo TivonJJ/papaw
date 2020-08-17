@@ -1,5 +1,11 @@
 <template>
-    <form @submit.prevent="submit" @reset="onReset" ref="form">
+    <form
+        @submit.prevent="submit"
+        @reset="onReset"
+        ref="form"
+        class="pa-form"
+        :class="{ 'required-mark': showRequiredMark }"
+    >
         <slot />
     </form>
 </template>
@@ -14,13 +20,16 @@ export default {
         return {
             errors: null,
             rules: {},
-            shouldValidate: false,
         };
     },
 
     props: {
         model: {
             type: Object,
+        },
+        showRequiredMark: {
+            type: Boolean,
+            default: false,
         },
     },
 
@@ -79,7 +88,6 @@ export default {
             return { ...this.rules };
         },
         validate(callback) {
-            this.shouldValidate = true;
             const validator = new Validator(this.getValidatorRules());
             return validator.validate(this.model, (errors, fields) => {
                 this.errors = fields;
@@ -89,7 +97,6 @@ export default {
             });
         },
         validateField(props, callback) {
-            if (!this.shouldValidate) return;
             const validatorRules = this.getValidatorRules();
             const validate = (name, callback) => {
                 if (!validatorRules[name]) {
@@ -130,4 +137,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+.pa-form:not(.required-mark) .pa-form-item:before {
+    display: none;
+}
+</style>

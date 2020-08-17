@@ -1,6 +1,7 @@
 <template>
     <span>
-        {{ amount }}
+        <label class="unit">{{ unit }}</label
+        >{{ amount }}
     </span>
 </template>
 
@@ -8,14 +9,17 @@
 export default {
     name: 'Amount',
     props: {
-        value: Number,
+        value: [Number, String],
         isFen: {
             type: Boolean,
-            default: true,
+            default: false,
         },
         precision: {
             type: Number,
             default: 2,
+        },
+        unit: {
+            type: String,
         },
     },
     computed: {
@@ -27,10 +31,14 @@ export default {
             if (this.isFen) {
                 value = value / 100;
             }
-            return value.toFixed(this.precision);
+            return (+value).toFixed(this.precision);
         },
     },
 };
 </script>
 
-<style scoped></style>
+<style lang="less" scoped>
+.unit {
+    font-size: 60%;
+}
+</style>
