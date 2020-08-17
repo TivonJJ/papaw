@@ -123,3 +123,15 @@ export const toBoolean = (val: any) => {
 export const getPublicPath = (path?: string) => {
     return joinPath(Settings.basePath, path);
 };
+
+/**
+ * 浏览器环境及类型
+ */
+export const browser = {
+    isWX: /MicroMessenger/i.test(navigator.userAgent),
+    isAliPay: /Alipay/i.test(navigator.userAgent),
+    isAndroid:
+        navigator.userAgent.indexOf('Android') > -1 ||
+        navigator.userAgent.indexOf('Adr') > -1,
+    isIOS: !!navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/),
+};

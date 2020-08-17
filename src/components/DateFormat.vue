@@ -9,7 +9,7 @@ import moment from 'moment';
 export default class DateFormat extends Vue {
     @Prop()
     public date?: string | Date | number;
-    @Prop({ default: 'YYYY-MM-DD HH:mm' })
+    @Prop({ default: 'YYYY-MM-DD HH:mm:ss' })
     public format?: string;
 
     public get formattedDate() {
