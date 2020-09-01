@@ -93,6 +93,7 @@ import DateFormat from '@/components/DateFormat.vue';
     },
 })
 export default class Demo extends Vue {
+    public name = 'demo';
     interval?: number = undefined;
 
     @Provide() date: number = Date.now();

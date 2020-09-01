@@ -1,13 +1,16 @@
 <template>
     <div id="app">
-        <transition :name="transitionName">
-            <router-view />
+        <transition :name="isForward ? 'slide-left' : 'slide-right'">
+            <keep-alive :include="keepAliveRoutes">
+                <router-view />
+            </keep-alive>
         </transition>
     </div>
 </template>
 <script>
 import Vue from 'vue';
 import { Dialog, Toast, Notify } from 'vant';
+import { mapState } from 'vuex';
 
 Vue.use(Dialog)
     .use(Toast)
@@ -15,19 +18,11 @@ Vue.use(Dialog)
 
 export default {
     name: 'App',
-    data() {
-        return {
-            transitionName: '',
-        };
-    },
-    watch: {
-        //使用watch 监听$router的变化
-        $route(to, from) {
-            const toPath = to.path.split('/').filter(n => !!n);
-            const fromPath = from.path.split('/').filter(n => !!n);
-            this.transitionName =
-                toPath.length >= fromPath.length ? 'slide-left' : 'slide-right';
-        },
+    computed: {
+        ...mapState({
+            keepAliveRoutes: state => state.navigator.keepAliveRoutes,
+            isForward: state => state.navigator.isForward,
+        }),
     },
 };
 </script>

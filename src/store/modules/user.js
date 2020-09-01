@@ -1,15 +1,5 @@
 import { login } from '@/service/user';
 
-export interface UserModel {
-    id: number | string;
-    name: string;
-    token: string;
-}
-
-export interface UserState {
-    currentUser: UserModel;
-}
-
 const Storage = sessionStorage;
 
 const state = {
@@ -17,7 +7,7 @@ const state = {
 };
 
 const mutations = {
-    SET_CURRENT_USER: (currentState: UserState, user: UserModel) => {
+    SET_CURRENT_USER: (currentState, user) => {
         currentState.currentUser = user;
         setLocalUser(user);
     },
@@ -25,8 +15,8 @@ const mutations = {
 
 const actions = {
     // user login
-    async login({ commit, dispatch }: any, userInfo: any) {
-        return login(userInfo).then(async (response: any) => {
+    async login({ commit, dispatch }, userInfo) {
+        return login(userInfo).then(async response => {
             const user = response.data;
             commit('SET_CURRENT_USER', user);
             return user;
@@ -34,7 +24,7 @@ const actions = {
     },
 
     // user logout
-    logout({ commit }: any) {
+    logout({ commit }) {
         commit('SET_CURRENT_USER', null);
     },
 };
@@ -58,7 +48,7 @@ function getLocalUser() {
     }
 }
 
-function setLocalUser(user: UserModel | string) {
+function setLocalUser(user) {
     if (typeof user === 'object') {
         user = JSON.stringify(user);
     }

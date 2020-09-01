@@ -25,6 +25,7 @@ import { mapState } from 'vuex';
     },
 })
 export default class ModelView extends Vue {
+    public name = 'model';
     count?: number;
 
     increment() {

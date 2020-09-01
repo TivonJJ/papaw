@@ -5,7 +5,7 @@ import getters from './getters';
 Vue.use(Vuex);
 
 // https://webpack.js.org/guides/dependency-management/#requirecontext
-const modulesFiles = require.context('./modules', true, /\.ts$/);
+const modulesFiles = require.context('./modules', true, /\.[j|t]s$/);
 
 // you do not need `import app from './modules/app'`
 // it will auto require all vuex module from modules file

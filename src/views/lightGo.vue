@@ -9,6 +9,7 @@
 import { Button } from 'vant';
 import lightGo from '@/utils/lightGo';
 export default {
+    name: 'lightGo',
     components: {
         Button,
     },

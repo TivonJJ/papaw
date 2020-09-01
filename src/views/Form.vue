@@ -103,6 +103,7 @@ interface Form {
     },
 })
 export default class FormView extends Vue {
+    public name = 'form';
     @Provide()
     form: Form = {
         bookTime: undefined,

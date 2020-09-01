@@ -10,9 +10,21 @@ const { VUE_APP_BUILD_ENV } = process.env;
 
 Vue.config.productionTip = VUE_APP_BUILD_ENV === 'development';
 
+let isPopState = false;
+window.addEventListener('popstate', event => {
+    isPopState = true;
+});
 router.beforeEach((to, from, next) => {
     document.title = getPageTitle(to.meta.title);
-    next();
+    setTimeout(() => {
+        if (isPopState) {
+            store.commit('navigator/popKeepAliveRoutes');
+        } else {
+            store.commit('navigator/pushKeepAliveRoutes', to.name);
+        }
+        isPopState = false;
+        next();
+    });
 });
 
 // Extend finally method to Promise's prototype if it dose not exist

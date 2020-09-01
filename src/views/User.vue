@@ -20,7 +20,6 @@
 import { Component, Vue, Provide } from 'vue-property-decorator';
 import { Button, Toast } from 'vant';
 import { mapGetters } from 'vuex';
-import { UserModel } from '@/store/modules/user';
 
 @Component({
     components: {
@@ -29,7 +28,8 @@ import { UserModel } from '@/store/modules/user';
     computed: mapGetters(['currentUser']),
 })
 export default class UserView extends Vue {
-    currentUser?: UserModel;
+    public name = 'user';
+    currentUser?: any;
     @Provide()
     loading: boolean = false;
 
