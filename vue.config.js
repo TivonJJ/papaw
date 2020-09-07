@@ -1,4 +1,3 @@
-'use strict';
 const fs = require('fs');
 const { join } = require('path');
 const settings = require('./settings');
@@ -12,6 +11,7 @@ const startParams = getStartParams();
 if ('basePath' in startParams) {
     settings.basePath = startParams.basePath;
 }
+console.log('run basePath', settings.basePath);
 env.VUE_APP_TITLE = settings.title;
 env.VUE_APP_BUILD_ENV = BUILD_ENV;
 env.VUE_APP_BASE_PATH = settings.basePath;
@@ -36,6 +36,11 @@ module.exports = {
             less: {
                 modifyVars: theme,
                 javascriptEnabled: true,
+            },
+            postcss: {
+                autoprefixer: {
+                    browsers: ['Android >= 4.0', 'iOS >= 8'],
+                },
             },
         },
     },
