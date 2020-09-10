@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import Home from '../views/home';
+import NotFount from '../views/404.vue';
 
 Vue.use(VueRouter);
 
@@ -48,6 +49,10 @@ const routes = [
         meta: { title: 'lightGo' },
         component: () =>
             import(/* webpackChunkName: "lightGo" */ '@/views/lightGo.vue'),
+    },
+    {
+        path: '*',
+        component: NotFount,
     },
 ];
 

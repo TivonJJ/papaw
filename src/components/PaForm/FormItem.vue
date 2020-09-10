@@ -22,6 +22,7 @@
         :readonly="readonly"
         :disabled="disabled"
         :autosize="autosize"
+        :autofocus="autofocus"
         :left-icon="leftIcon"
         :right-icon="rightIcon"
         :clearable="clearable"
@@ -84,6 +85,7 @@ export default {
         },
         error: Boolean,
         autosize: [Boolean, Object],
+        autofocus: Boolean,
         leftIcon: String,
         rightIcon: String,
         clearable: Boolean,
